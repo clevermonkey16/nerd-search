@@ -18,6 +18,8 @@ titles = driver.find_elements(By.XPATH, "//a[@data-automation-id='jobTitle']")
 for i in titles:
     i.click()
     time.sleep(5)
+    jobinfo = driver.find_element(By.XPATH, '//*[@data-automation-id="jobPostingDescription"]').text
+    print(jobinfo)
 #title.click()
 
 while True:

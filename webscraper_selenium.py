@@ -24,3 +24,5 @@ while True:
     ...
 
 driver.quit()
+
+import xlsxwriter

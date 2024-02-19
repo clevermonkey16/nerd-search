@@ -6,7 +6,7 @@ class SQLWriter:
         self.cursor = self.connection.cursor()
         print("Connected to the database")
 
-    def write(self, sql_command):
+    def query(self, sql_command):
         self.cursor.execute(sql_command)
         self.connection.commit()
 

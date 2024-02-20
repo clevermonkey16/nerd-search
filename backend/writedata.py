@@ -7,7 +7,7 @@ class SQLWriter:
         self.connection = sqlite3.connect(fileName)
         self.cursor = self.connection.cursor()
         self.tableName = tableName
-        self.query("CREATE TABLE IF NOT EXISTS " + self.tableName + " (title TEXT, location TEXT, description TEXT, date_posted TEXT, job_id TEXT)")
+        self.query("CREATE TABLE IF NOT EXISTS " + self.tableName + " (title TEXT, location TEXT, description TEXT, date_posted TEXT, job_id TEXT, link TEXT)")
         print("Connected to the database")
 
     def query(self, sql_command, values = ()):
@@ -19,7 +19,7 @@ class SQLWriter:
 
     def insert(self, values):
         # values is a tuple of (title, location, description, date_posted, job_id)
-        writer.query(f"INSERT INTO {self.tableName} VALUES (?, ?, ?, ?, ?)", values)
+        self.query(f"INSERT INTO {self.tableName} VALUES (?, ?, ?, ?, ?, ?)", values)
         
 
     def close(self):

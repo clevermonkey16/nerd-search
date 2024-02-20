@@ -24,12 +24,16 @@ for j in range(2):
     job_title_info = driver.find_element(By.XPATH, '//*[@data-automation-id="jobPostingHeader"]').text
     location_info = driver.find_element(By.XPATH, '//*[@class="css-129m7dg"]').text
     job_info = driver.find_element(By.XPATH, '//*[@data-automation-id="jobPostingDescription"]').text
-    query = "INSERT INTO jobs VALUES (?, ?, ?)"
-    values = (job_title_info, location_info, job_info)
-    SQL_data.query(query, values)
+    date_posted = driver.find_element(By.XPATH, '//*[@data-automation-id="postedOn"]').text
+    job_id = driver.find_element(By.XPATH, '//*[@class="css-h2nt8k"]').text
+    list_link = driver.find_element(By.XPATH, '//a[@data-automation-id="jobTitle"]')
+    link = list_link.get_attribute("href")
+    #query = "INSERT INTO jobs VALUES (?, ?, ?, ?, ?)"
+    values = (job_title_info, location_info, job_info, date_posted, job_id, link)
+    #SQL_data.query(query, values)
+    SQL_data.insert(values)
 
 #title.click()
 SQL_data.close()
 driver.quit()
 
-import xlsxwriter

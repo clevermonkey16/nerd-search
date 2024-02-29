@@ -22,7 +22,7 @@ for j in range(2):
     i.click()
     time.sleep(5)
     job_title_info = driver.find_element(By.XPATH, '//*[@data-automation-id="jobPostingHeader"]').text
-    location_info = driver.find_element(By.XPATH, '//*[@class="css-129m7dg"]').text
+    location_info = driver.find_element(By.XPATH, '//*[@class="css-129m7dg"]').text #put this outside the loop to create a list to iterate through
     job_info = driver.find_element(By.XPATH, '//*[@data-automation-id="jobPostingDescription"]').text
     date_posted = driver.find_element(By.XPATH, '//*[@data-automation-id="postedOn"]').text
     job_id = driver.find_element(By.XPATH, '//*[@class="css-h2nt8k"]').text

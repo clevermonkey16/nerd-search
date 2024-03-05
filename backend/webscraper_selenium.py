@@ -23,11 +23,10 @@ time.sleep(10)
 # titles, job_ids, and list_link is a list
 titles = driver.find_elements(By.XPATH, "//a[@data-automation-id='jobTitle']")
 job_ids = driver.find_elements(By.XPATH, '//li[@class="css-h2nt8k"]')
-list_link = driver.find_elements(By.XPATH, '//a[@data-automation-id="jobTitle"]')
 
 for j in range(2):
     job_id = job_ids[j].text
-    link = list_link[j].get_attribute("href")
+    link = titles[j].get_attribute("href")
     i = titles[j]
     i.click()
     time.sleep(5)

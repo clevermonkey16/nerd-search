@@ -20,10 +20,6 @@ titles = driver.find_elements(By.XPATH, '//a[@data-mapped="true"]')
 
 for j in range(len(titles)):
     i = titles[j]
-    i.click()
-    time.sleep(5)
-    job_info = driver.find_element(By.XPATH, '//div[@id="content"]').text
-    print(job_info)
     job_title_info = titles[j].text
     link = titles[j].get_attribute("href")
     i.click()

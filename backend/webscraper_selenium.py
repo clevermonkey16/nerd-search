@@ -9,7 +9,7 @@ from selenium.webdriver.common.by import By
 website = 'https://nvidia.wd5.myworkdayjobs.com/NVIDIAExternalCareerSite?q=intern&locationHierarchy1=2fcb99c455831013ea52fb338f2932d8'
 
 driver = webdriver.Chrome()
-SQL_data = writedata.SQLWriter("jobs.db")
+SQL_data = writedata.SQLWriter("backend\jobs.db")
 driver.get(website)
 
 time.sleep(10)
@@ -34,7 +34,7 @@ for j in range(2):
     location_info = driver.find_element(By.XPATH, '//*[@class="css-129m7dg"]').text
     job_info = driver.find_element(By.XPATH, '//*[@data-automation-id="jobPostingDescription"]').text
     date_posted = driver.find_element(By.XPATH, '//div[@data-automation-id="postedOn"]').text
-    values = (job_title_info, location_info, job_info, date_posted, job_id, link)
+    values = (job_title_info, location_info, job_info, date_posted, link, 1) #if a job is inserted, it's validity is set to 1
     #SQL_data.query(query, values)
     SQL_data.insert(values)
 

@@ -25,6 +25,7 @@ class SQLWriter:
 
     def insert(self, values):
         # values is a tuple of (title, location, description, date_posted, job_id, link, validity(bit))
+        
         try:
             self.query(f"INSERT INTO {self.tableName} VALUES (?, ?, ?, ?, ?, ?)", values)
         except sqlite3.IntegrityError:
@@ -32,6 +33,9 @@ class SQLWriter:
             print("job_id not unique")
         except:
             print("fatal error, entry not inserted")
+    
+        # Laurence: this is just for me to test what errors i have in my webscraping code, ill delete after done
+        #self.query(f"INSERT INTO {self.tableName} VALUES (?, ?, ?, ?, ?, ?)", values)
     
     def allInvalid(self):
         self.query(f"UPDATE {self.tableName} SET valid = ?", [0])

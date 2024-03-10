@@ -6,7 +6,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 
 # Set Path for to ChromeDriver
-website = 'https://boards.greenhouse.io/samsungsemiconductor'
+website = 'https://careers.qualcomm.com/careers/?query=intern&location=United%20States&pid=446694599363&domain=qualcomm.com&sort_by=relevance&triggerGoButton=false&triggerGoButton=true'
 
 
 driver = webdriver.Chrome()
@@ -15,25 +15,40 @@ driver.get(website)
 
 time.sleep(10)
 #test
-#Titles is a list
-titles = driver.find_elements(By.XPATH, '//a[@data-mapped="true"]')
+#Titles and location are a lists
 
-for j in range(len(titles)):
+
+
+showMorePositions = driver.find_element(By.XPATH, '//div[@class="iframe-button-wrapper"]')
+showMorePositions.click()
+
+titles = driver.find_elements(By.XPATH, '//*[contains(@data-test-id, "position-card")]')
+location = driver.find_elements(By.XPATH, '//p[@class="field-label"]')
+
+time.sleep(5) 
+
+# modify range later depending 
+for j in range(2):
     i = titles[j]
-    job_title_info = titles[j].text
-    link = titles[j].get_attribute("href")
+    location_info = location[j].text
+    #link = titles[j].get_attribute("href")
     i.click()
     time.sleep(5)
-    location_info = driver.find_element(By.XPATH, '//div[@class="location"]').text
-    job_info = driver.find_element(By.XPATH, '//div[@id="content"]').text
-    # No job_id or date_posted in Greenhouse
-    job_id = 'NULL'
-    date_posted = 'NULL'
+    link = driver.current_url
+    job_title_info = driver.find_element(By.XPATH, '//*[@class="position-title"]').text
+    job_info = driver.find_element(By.XPATH, '//div[@class="position-job-description"]').text
 
-    values = (job_title_info, location_info, job_info, date_posted, job_id, link)
+    # from the two eightfold websites, one of them did not have date posted
+    try:
+        date_posted = driver.find_element(By.XPATH, '//div[@class="custom-jd-field col-md-2"]').text
+    except:
+        data_posted = 'NULL'
+
+    values = (job_title_info, location_info, job_info, date_posted, link, 1)
     SQL_data.insert(values)
-    driver.back() 
     time.sleep(5)
+
+
     
 #title.click() 
 

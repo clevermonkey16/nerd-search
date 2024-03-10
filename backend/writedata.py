@@ -12,8 +12,8 @@ class SQLWriter:
                    location     TEXT, 
                    description  TEXT, 
                    date_posted  TEXT, 
-                   job_id       TEXT UNIQUE, """ #Note that we verify for uniqueness using job_id
-                  "link         TEXT UNIQUE)")
+                   link         TEXT UNIQUE,
+                   valid        BIT)""")
         print("Connected to the database")
 
     def query(self, sql_command, values = ()):
@@ -21,21 +21,35 @@ class SQLWriter:
         self.connection.commit()
     
     def remove(self, value): #this to be changed later on
-        self.query(f"DELETE FROM {self.tableName} WHERE job_id LIKE ?", value)
+        self.query(f"DELETE FROM {self.tableName} WHERE valid LIKE ?", [value])
 
     def insert(self, values):
-        # values is a tuple of (title, location, description, date_posted, job_id, link)
+        # values is a tuple of (title, location, description, date_posted, job_id, link, validity(bit))
         try:
             self.query(f"INSERT INTO {self.tableName} VALUES (?, ?, ?, ?, ?, ?)", values)
-        except:
+        except sqlite3.IntegrityError:
+            self.query(f"UPDATE {self.tableName} SET valid = ? WHERE link LIKE ?", [1, values[4]]) #now the job is "verified" if it is a dupe
             print("job_id not unique")
+        except:
+            print("fatal error, entry not inserted")
+    
+    def allInvalid(self):
+        self.query(f"UPDATE {self.tableName} SET valid = ?", [0])
+
+    def nukeInvalid(self):
+        self.remove(0)
+    
+    def nukeTable(self, confirm): #use this one cautiously
+        if(confirm == "Yeah, i'm sure"):
+            self.cursor.execute(f"DROP TABLE {self.tableName}")
+        else:
+            print("check your nuclear launch codes")
 
     def close(self):
         self.connection.close()
 
 if __name__ == "__main__":
     writer = SQLWriter("jobs.db") #Make this an absolute path
-    #writer.query("DROP TABLE IF EXISTS duplicate_table")
     values = ("Software Engineer", "Santa Clara", "We are looking for a software engineer", "2021-08-01", "1234")
     writer.insert(values)
     writer.close()

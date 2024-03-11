@@ -22,21 +22,41 @@ time.sleep(10)
 # Extract internship information and store in SQL db
 # titles, job_ids, and list_link is a list
 titles = driver.find_elements(By.XPATH, "//a[@data-automation-id='jobTitle']")
-job_ids = driver.find_elements(By.XPATH, '//li[@class="css-h2nt8k"]')
+flag = True
+while(flag):
+    # This is just for error handling
+    for i in range(len(titles)):
+        print(titles[i].text)
 
-for j in range(2):
-    job_id = job_ids[j].text
-    link = titles[j].get_attribute("href")
-    i = titles[j]
-    i.click()
-    time.sleep(5)
-    job_title_info = driver.find_element(By.XPATH, '//*[@data-automation-id="jobPostingHeader"]').text
-    location_info = driver.find_element(By.XPATH, '//*[@class="css-129m7dg"]').text
-    job_info = driver.find_element(By.XPATH, '//*[@data-automation-id="jobPostingDescription"]').text
-    date_posted = driver.find_element(By.XPATH, '//div[@data-automation-id="postedOn"]').text
-    values = (job_title_info, location_info, job_info, date_posted, link, 1) #if a job is inserted, it's validity is set to 1
-    #SQL_data.query(query, values)
-    SQL_data.insert(values)
+    for j in range(len(titles)):
+        try:
+            link = titles[j].get_attribute("href")
+            i = titles[j]
+            i.click()
+            time.sleep(5)
+            job_title_info = driver.find_element(By.XPATH, '//*[@data-automation-id="jobPostingHeader"]').text
+            location_info = driver.find_element(By.XPATH, '//*[@class="css-129m7dg"]').text
+            job_info = driver.find_element(By.XPATH, '//*[@data-automation-id="jobPostingDescription"]').text
+            date_posted = driver.find_element(By.XPATH, '//div[@data-automation-id="postedOn"]').text
+            values = (job_title_info, location_info, job_info, date_posted, link, 1) #if a job is inserted, it's validity is set to 1
+            SQL_data.insert(values)
+        except:
+            print("nothing to print")
+            
+
+    try:
+        time.sleep(5)
+        nextButton = driver.find_element(By.XPATH, '//button[@data-uxi-widget-type="stepToNextButton"]')
+        nextButton.click()
+        time.sleep(10)
+        titles = driver.find_elements(By.XPATH, "//a[@data-automation-id='jobTitle']")
+    except:
+        flag = False
+        
+print("Code is done!")
+
+
+
 
 #title.click() 
 SQL_data.close()

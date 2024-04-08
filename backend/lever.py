@@ -37,7 +37,8 @@ def scrape(link):
         date_posted = 'NULL'
         values = (job_title_info, location_info, job_info, date_posted, link, 1)
         SQL_data.insert(values)
-        driver.back() 
+        driver.back()
+        
         time.sleep(5)
 
 

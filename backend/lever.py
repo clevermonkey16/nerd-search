@@ -11,7 +11,10 @@ def scrape(link):
 # Set Path for to ChromeDriver
     website = link
 
-    driver = webdriver.Chrome()
+    options = Options()
+    options.add_argument("--headless=new") # Uncomment this line to run headless
+
+    driver = webdriver.Chrome(options=options)
     SQL_data = writedata.SQLWriter("jobs.db")
     driver.get(website)
 
@@ -21,7 +24,7 @@ def scrape(link):
     titles = driver.find_elements(By.XPATH, '//a[@class="posting-title"]')
     #job_title = driver.find_elements(By.XPATH, '//*[@data-qa="posting-name"]')
 
-    for j in range(3):
+    for j in range(len(titles)):
         i = titles[j]
         #job_title_info = job_title[j].text
         job_title_info = titles[j].text

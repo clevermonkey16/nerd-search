@@ -28,7 +28,7 @@ def scrape(link):
     time.sleep(5) 
 
     # modify range later depending 
-    for j in range(2):
+    for j in range(len(titles)):
         i = titles[j]
         location_info = location[j].text
         #link = titles[j].get_attribute("href")

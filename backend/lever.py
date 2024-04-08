@@ -30,10 +30,9 @@ def scrape(link):
         time.sleep(5)
         location_info = driver.find_element(By.XPATH, '//div[@class="sort-by-time posting-category medium-category-label width-full capitalize-labels location"]').text
         job_info = driver.find_element(By.XPATH, '//div[@class="section-wrapper page-full-width"]').text
-        # No job_id or date_posted in lever
-        job_id = 'NULL'
+        # date_posted in lever
         date_posted = 'NULL'
-        values = (job_title_info, location_info, job_info, date_posted, job_id, link)
+        values = (job_title_info, location_info, job_info, date_posted, link, 1)
         SQL_data.insert(values)
         driver.back() 
         time.sleep(5)

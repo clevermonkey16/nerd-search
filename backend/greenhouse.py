@@ -28,11 +28,10 @@ def scrape(link):
         time.sleep(5)
         location_info = driver.find_element(By.XPATH, '//div[@class="location"]').text
         job_info = driver.find_element(By.XPATH, '//div[@id="content"]').text
-        # No job_id or date_posted in Greenhouse
-        job_id = 'NULL'
+        #date_posted in Greenhouse
         date_posted = 'NULL'
 
-        values = (job_title_info, location_info, job_info, date_posted, job_id, link)
+        values = (job_title_info, location_info, job_info, date_posted, link, 1)
         SQL_data.insert(values)
         driver.back() 
         time.sleep(5)

@@ -23,6 +23,8 @@ def scrape(type, link):
         eightfold.scrape(link)
     elif type == "lever":
         lever.scrape(link)
+    elif type == "greenhouse":
+        greenhouse.scrape(link)
     else:
         print("bruh it no correct")
         pass
@@ -33,4 +35,5 @@ if __name__ == "__main__":
 
 
     # scrape("workday", "https://nvidia.wd5.myworkdayjobs.com/NVIDIAExternalCareerSite?q=intern&locationHierarchy1=2fcb99c455831013ea52fb338f2932d8")
+    scrape("lever", "https://jobs.lever.co/cohere")
 

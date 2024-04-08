@@ -12,7 +12,10 @@ def scrape(link):
     # Set Path for to ChromeDriver
     website = link
 
-    driver = webdriver.Chrome()
+    options = Options()
+    # options.add_argument("--headless=new") # Uncomment this line to run headless
+
+    driver = webdriver.Chrome(options=options)
     #SQL_data = writedata.SQLWriter("backend\jobs.db")
     SQL_data = writedata.SQLWriter("jobs.db")
     driver.get(website)
@@ -64,3 +67,6 @@ def scrape(link):
     #title.click() 
     SQL_data.close()
     driver.quit()
+
+if __name__ == "__main__":
+    scrape("https://nvidia.wd5.myworkdayjobs.com/NVIDIAExternalCareerSite?q=intern&locationHierarchy1=2fcb99c455831013ea52fb338f2932d8")

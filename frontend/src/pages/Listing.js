@@ -1,13 +1,13 @@
 import React from "react";
 
 import JobBoard from "../components/JobBoard";
-import JobDetails from "../components/JobDetails";
+import SearchBar from "../components/SearchBar";
 
 function Listing() {
   return (
     <>
+      <SearchBar />
       <JobBoard />
-      <JobDetails />
     </>
   );
 }

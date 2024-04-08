@@ -8,7 +8,7 @@ from selenium.webdriver.common.by import By
 # testing link 'https://jobs.lever.co/cohere'
 
 def scrape(link):
-    # Set Path for to ChromeDriver
+# Set Path for to ChromeDriver
     website = link
 
     driver = webdriver.Chrome()

@@ -1,5 +1,5 @@
 import time
-import backend.writedata as writedata
+import writedata as writedata
 
 from selenium import webdriver 
 from selenium.webdriver.chrome.options import Options
@@ -12,10 +12,8 @@ from selenium.webdriver.common.by import By
 def scrape(link):
     # Set Path for to ChromeDriver
     website = link
-
     options = Options()
     # options.add_argument("--headless=new") # Uncomment this line to run headless
-
     driver = webdriver.Chrome(options=options)
     #SQL_data = writedata.SQLWriter("backend\jobs.db")
     SQL_data = writedata.SQLWriter("jobs.db")

@@ -1,5 +1,5 @@
 import time
-import backend.writedata as writedata
+import writedata as writedata
 
 from selenium import webdriver 
 from selenium.webdriver.chrome.options import Options

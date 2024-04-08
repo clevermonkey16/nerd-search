@@ -8,7 +8,7 @@ from selenium.webdriver.common.by import By
 # Test link: 'https://boards.greenhouse.io/samsungsemiconductor'
 
 def scrape(link):
-# Set Path for to ChromeDriver
+    # Set Path for to ChromeDriver
     website = link
 
     driver = webdriver.Chrome()

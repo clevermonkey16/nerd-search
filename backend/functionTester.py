@@ -1,8 +1,8 @@
 import writedata
 import time
 
-SQL_data = writedata.SQLWriter("backend\jobs.db")
-
+#SQL_data = writedata.SQLWriter("backend\jobs.db")
+SQL_data = writedata.SQLWriter("jobs.db")
 fValues = ("one","two","three","four","five", 1)
 dValues = ("a", "b", "c", "d", "e", 1)
 cValues = ("aardvark", "bat", "cat", "dog", "elephant", 1)

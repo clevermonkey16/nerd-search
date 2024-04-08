@@ -1,4 +1,4 @@
-import writedata
+import backend.Webscrapers.writedata as writedata
 import time
 
 #SQL_data = writedata.SQLWriter("backend\jobs.db")

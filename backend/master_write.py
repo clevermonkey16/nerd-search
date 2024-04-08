@@ -8,14 +8,17 @@
 # 6. Close the database connection
 
 import workday
-import eightfold
-import lever
 import greenhouse
+import lever
+import eightfold
+import writedata
 
 
 def scrape(type, link):
     if type == "workday":
         workday.scrape(link)
+    elif type == "greenhouse":
+        greenhouse.scrape(link)
     elif type == "eightfold":
         eightfold.scrape(link)
     elif type == "lever":
@@ -25,7 +28,12 @@ def scrape(type, link):
     else:
         print("bruh it no correct")
         pass
-        
+
+    
 if __name__ == "__main__":
+    SQL_data = writedata.SQLWriter("jobs.db")
+
+
+    # scrape("workday", "https://nvidia.wd5.myworkdayjobs.com/NVIDIAExternalCareerSite?q=intern&locationHierarchy1=2fcb99c455831013ea52fb338f2932d8")
     scrape("lever", "https://jobs.lever.co/cohere")
 

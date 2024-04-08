@@ -72,4 +72,3 @@ def scrape(link):
     SQL_data.close()
     driver.quit()
 
-

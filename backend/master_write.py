@@ -10,6 +10,7 @@
 from Webscrapers import workday
 import writedata
 
+
 def scrape(type, link):
     if type == "workday":
         workday.scrape(link)

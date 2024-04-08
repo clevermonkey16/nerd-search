@@ -38,7 +38,9 @@ def scrape(link):
         values = (job_title_info, location_info, job_info, date_posted, link, 1)
         SQL_data.insert(values)
         driver.back()
-        
+
+        titles = driver.find_elements(By.XPATH, '//a[@class="posting-title"]')
+         
         time.sleep(5)
 
 

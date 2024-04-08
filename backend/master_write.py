@@ -56,7 +56,9 @@ if __name__ == "__main__":
 
     # 4. For each company, start scraping, calling insert() for each job
     # scrape("workday", "https://nvidia.wd5.myworkdayjobs.com/NVIDIAExternalCareerSite?q=intern&locationHierarchy1=2fcb99c455831013ea52fb338f2932d8")
-    scrape("lever", "https://jobs.lever.co/cohere")
+    # scrape("lever", "https://jobs.lever.co/cohere") # broken
+    # scrape("greenhouse", "https://boards.greenhouse.io/samsungsemiconductor")
+    scrape("eightfold", "https://careers.qualcomm.com/careers/?query=intern&location=United%20States&pid=446694599363&domain=qualcomm.com&sort_by=relevance&triggerGoButton=false&triggerGoButton=true")
 
     SQL_data.nukeInvalid()
     SQL_data.close()

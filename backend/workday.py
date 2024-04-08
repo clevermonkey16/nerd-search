@@ -41,10 +41,14 @@ def scrape(link):
                 link = titles[j].get_attribute("href")
                 i = titles[j]
                 i.click()
-                time.sleep(5)
+                time.sleep(2)
                 job_title_info = driver.find_element(By.XPATH, '//*[@data-automation-id="jobPostingHeader"]').text
                 #can not figure out location_info 
-                location_info = driver.find_element(By.XPATH, '//dd[@class="css-129m7dg"]').text
+                location_list = driver.find_elements(By.XPATH, '//div[@class="css-cygeeu"]//dd[@class="css-129m7dg"]')
+                location_info = ""
+                for i in range(len(location_list)):
+                    print(location_list[i].text)
+                    location_info += f"{location_list[i].text}\n"
                 job_info = driver.find_element(By.XPATH, '//*[@data-automation-id="jobPostingDescription"]').text
                 date_posted = driver.find_element(By.XPATH, '//div[@data-automation-id="postedOn"]').text
                 values = (job_title_info, location_info, job_info, date_posted, link, 1) #if a job is inserted, it's validity is set to 1
@@ -68,5 +72,4 @@ def scrape(link):
     SQL_data.close()
     driver.quit()
 
-if __name__ == "__main__":
-    scrape("https://nvidia.wd5.myworkdayjobs.com/NVIDIAExternalCareerSite?q=intern&locationHierarchy1=2fcb99c455831013ea52fb338f2932d8")
+scrape('https://nvidia.wd5.myworkdayjobs.com/NVIDIAExternalCareerSite?q=intern&locationHierarchy1=2fcb99c455831013ea52fb338f2932d8')

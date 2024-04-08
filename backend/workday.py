@@ -8,7 +8,6 @@ from selenium.webdriver.common.by import By
 # Testing Link
 # https://nvidia.wd5.myworkdayjobs.com/NVIDIAExternalCareerSite?q=intern&locationHierarchy1=2fcb99c455831013ea52fb338f2932d8
 
-
 def scrape(link):
     # Set Path for to ChromeDriver
     website = link

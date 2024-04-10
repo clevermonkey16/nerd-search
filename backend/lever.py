@@ -12,7 +12,7 @@ def scrape(link):
     website = link
 
     options = Options()
-    options.add_argument("--headless=new") # Uncomment this line to run headless
+    #options.add_argument("--headless=new") # Uncomment this line to run headless
 
     driver = webdriver.Chrome(options=options)
     SQL_data = writedata.SQLWriter("jobs.db")
@@ -20,31 +20,33 @@ def scrape(link):
 
     time.sleep(10)
 
-    #Titles and Job_title are both lists
-    titles = driver.find_elements(By.XPATH, '//a[@class="posting-title"]')
-    #job_title = driver.find_elements(By.XPATH, '//*[@data-qa="posting-name"]')
-
+    #Titles and links are both lists
+    titles = driver.find_elements(By.XPATH, '//a[@class="posting-title"]//h5[@data-qa="posting-name"]')
+    #this is for the driver to get job_link later on
+    links = driver.find_elements(By.XPATH, '//a[@class="posting-title"]')
+   
     for j in range(len(titles)):
         i = titles[j]
-        #job_title_info = job_title[j].text
         job_title_info = titles[j].text
-        link = titles[j].get_attribute("href")
-        i.click()
-        time.sleep(5)
+        job_link = links[j].get_attribute("href")
+        driver.get(job_link)
+        time.sleep(3)
         location_info = driver.find_element(By.XPATH, '//div[@class="sort-by-time posting-category medium-category-label width-full capitalize-labels location"]').text
         job_info = driver.find_element(By.XPATH, '//div[@class="section-wrapper page-full-width"]').text
-        # date_posted in lever
+        # no date_posted in lever
         date_posted = 'NULL'
-        values = (job_title_info, location_info, job_info, date_posted, link, 1)
+        values = (job_title_info, location_info, job_info, date_posted, job_link, 1)
         SQL_data.insert(values)
-        driver.back()
+        driver.back() 
+        time.sleep(3)
 
-        titles = driver.find_elements(By.XPATH, '//a[@class="posting-title"]')
-         
-        time.sleep(5)
+
 
 
     #title.click() 
     SQL_data.close()
     driver.quit()
 
+
+# Testing out script
+#scrape("https://jobs.lever.co/cohere")

@@ -49,10 +49,6 @@ if __name__ == "__main__":
             type = row[1]
             link = row[2]
 
-            print(row)
-
-            scrape(type, link)
-    """
 
     # 4. For each company, start scraping, calling insert() for each job
     # scrape("workday", "https://nvidia.wd5.myworkdayjobs.com/NVIDIAExternalCareerSite?q=intern&locationHierarchy1=2fcb99c455831013ea52fb338f2932d8")

@@ -3,24 +3,26 @@ import JobOverviewPanel from "./JobOverviewPanel";
 import JobDetails from "./JobDetails";
 import { useState } from "react";
 
-function JobBoard() {
-  const [selectedJob, setSelectedJob] = useState(null);
+function JobBoard({ jobs }) {
+  const [selectedJob, setSelectedJob] = useState([]);
 
-  const handleClick = (jobId) => {
-    setSelectedJob(jobId);
+  const handleClick = (title, company, location, datePosted, jobId) => {
+    setSelectedJob([title, company, location, datePosted, jobId]);
   };
 
   return (
     <div className="horizontalContainer">
-      <JobOverviewPanel handleClick={handleClick} />
+      <JobOverviewPanel
+        handleClick={handleClick}
+        jobs={jobs}
+      />
       <JobDetails
-        title="Intern"
-        company="Google"
-        location="Mexico"
-        pay="15"
-        datePosted="June"
-        jobId={selectedJob}
-        link="https://www.google.com"
+        title={selectedJob[0]}
+        company={selectedJob[1]}
+        location={selectedJob[2]}
+        datePosted={selectedJob[3]}
+        jobId={selectedJob[4]}
+        link={selectedJob[4]}
       />
     </div>
   );

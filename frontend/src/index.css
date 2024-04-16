@@ -64,6 +64,14 @@ code {
 
 /* End Job Overview */
 
+/* Page Controls */
+.pageControls {
+  margin-bottom: 3rem;
+  margin-top: 3rem;
+}
+
+/* End Page Controls */
+
 /* Job Details */
 .jobDetails {
   width: 39rem;

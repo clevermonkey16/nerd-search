@@ -28,13 +28,15 @@ def scrape(link):
     time.sleep(5) 
 
     # modify range later depending 
-    for j in range(2):
+    for j in range(len(titles)):
         i = titles[j]
         location_info = location[j].text
         #link = titles[j].get_attribute("href")
         i.click()
+
         time.sleep(5)
-        link = driver.current_url
+        job_link = driver.current_url
+
         job_title_info = driver.find_element(By.XPATH, '//*[@class="position-title"]').text
         job_info = driver.find_element(By.XPATH, '//div[@class="position-job-description"]').text
 
@@ -44,9 +46,9 @@ def scrape(link):
         except:
             data_posted = 'NULL'
 
-        values = (job_title_info, location_info, job_info, date_posted, link, 1)
+        values = (job_title_info, location_info, job_info, date_posted, job_link, 1)
         SQL_data.insert(values)
-        time.sleep(5)
+        time.sleep(3)
 
 
         

@@ -47,7 +47,7 @@ def scrape(link):
                 location_list = driver.find_elements(By.XPATH, '//div[@class="css-cygeeu"]//dd[@class="css-129m7dg"]')
                 location_info = ""
                 for i in range(len(location_list)):
-                    print(location_list[i].text)
+                    #print(location_list[i].text)
                     location_info += f"{location_list[i].text}\n"
                 job_info = driver.find_element(By.XPATH, '//*[@data-automation-id="jobPostingDescription"]').text
                 date_posted = driver.find_element(By.XPATH, '//div[@data-automation-id="postedOn"]').text
@@ -72,4 +72,3 @@ def scrape(link):
     SQL_data.close()
     driver.quit()
 
-scrape('https://nvidia.wd5.myworkdayjobs.com/NVIDIAExternalCareerSite?q=intern&locationHierarchy1=2fcb99c455831013ea52fb338f2932d8')

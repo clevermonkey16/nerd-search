@@ -16,19 +16,17 @@ import eightfold
 import writedata
 
 
-def scrape(type, link):
+def scrape(company, type, link):
     if type == "workday":
-        workday.scrape(link)
+        workday.scrape(company, link)
     elif type == "greenhouse":
-        greenhouse.scrape(link)
+        print("no greenhouse")
+        pass
+       # greenhouse.scrape(company, link)
     elif type == "eightfold":
-        print("skipped eightfold")
-        pass
-        # eightfold.scrape(link)
+        eightfold.scrape(company, link)
     elif type == "lever":
-        print("skipped lever")
-        pass
-        #lever.scrape(link)
+        lever.scrape(company, link)
     else:
         print("bruh it no correct")
         pass
@@ -53,7 +51,7 @@ if __name__ == "__main__":
 
             print(row)
 
-            scrape(type, link)
+            scrape(company, type, link)
     
 
     # 4. For each company, start scraping, calling insert() for each job

@@ -7,7 +7,7 @@ from selenium.webdriver.common.by import By
 
 # testing link 'https://jobs.lever.co/cohere'
 
-def scrape(link):
+def scrape(company, link):
 # Set Path for to ChromeDriver
     website = link
 
@@ -41,13 +41,10 @@ def scrape(link):
         job_info = driver.find_element(By.XPATH, '//div[@class="section-wrapper page-full-width"]').text
         # no date_posted in lever
         date_posted = 'NULL'
-        values = (job_title_info, location_info, job_info, date_posted, job_link, 1)
+        values = (company, job_title_info, location_info, job_info, date_posted, job_link, 1)
         SQL_data.insert(values)
         driver.back() 
         time.sleep(3)
-
-
-
 
     #title.click() 
     SQL_data.close()

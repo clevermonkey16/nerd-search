@@ -7,7 +7,7 @@ from selenium.webdriver.common.by import By
 
 # Test link: 'https://boards.greenhouse.io/samsungsemiconductor'
 
-def scrape(link):
+def scrape(company, link):
 # Set Path for to ChromeDriver
     website = link
 
@@ -22,7 +22,7 @@ def scrape(link):
     #test
     #Titles is a list
     titles = driver.find_elements(By.XPATH, '//a[@data-mapped="true"]')
-
+    
     for j in range(len(titles)):
         name = titles[j].text
         if "intern" not in name.lower(): 
@@ -38,7 +38,7 @@ def scrape(link):
         #date_posted in Greenhouse
         date_posted = 'NULL'
 
-        values = (job_title_info, location_info, job_info, date_posted, job_link, 1)
+        values = (company, job_title_info, location_info, job_info, date_posted, job_link, 1)
         SQL_data.insert(values)
         driver.back() 
         #time.sleep(0.2)

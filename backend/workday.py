@@ -13,7 +13,7 @@ def scrape(link):
     website = link
 
     options = Options()
-    # options.add_argument("--headless=new") # Uncomment this line to run headless
+    options.add_argument("--headless=new") # Uncomment this line to run headless
 
     driver = webdriver.Chrome(options=options)
     #SQL_data = writedata.SQLWriter("backend\jobs.db")

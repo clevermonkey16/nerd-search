@@ -40,6 +40,8 @@ def scrape(link):
         time.sleep(3)
 
 
+
+
     #title.click() 
     SQL_data.close()
     driver.quit()

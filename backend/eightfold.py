@@ -41,9 +41,16 @@ def scrape(link):
         #location_info = location[j].text
         #link = titles[j].get_attribute("href")
         i.click()
+<<<<<<< HEAD
         time.sleep(3)
         job_link = driver.current_url
         location_info = driver.find_element(By.XPATH, '//*[@class="position-location"]').text
+=======
+
+        time.sleep(5)
+        job_link = driver.current_url
+
+>>>>>>> 7b6ae08cd9bf913efaa1e868bc80782f55ed62df
         job_title_info = driver.find_element(By.XPATH, '//*[@class="position-title"]').text
         job_info = driver.find_element(By.XPATH, '//div[@class="position-job-description"]').text
 
@@ -55,6 +62,10 @@ def scrape(link):
 
         values = (job_title_info, location_info, job_info, date_posted, job_link, 1)
         SQL_data.insert(values)
+<<<<<<< HEAD
+=======
+        time.sleep(3)
+>>>>>>> 7b6ae08cd9bf913efaa1e868bc80782f55ed62df
 
 
         

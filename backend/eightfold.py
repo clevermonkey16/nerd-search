@@ -32,6 +32,10 @@ def scrape(link):
 
     # modify range later depending 
     for j in range(len(titles)):
+        name = titles[j].text
+        if "intern" not in name.lower(): 
+            # print(name, "not an intern job")
+            continue
         i = titles[j]
         location_info = location[j].text
         #link = titles[j].get_attribute("href")

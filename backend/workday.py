@@ -33,11 +33,15 @@ def scrape(link):
     flag = True
     while(flag):
         # This is just for error handling
-        for i in range(len(titles)):
-            print(titles[i].text)
+        # for i in range(len(titles)):
+        #     print(titles[i].text)
 
         for j in range(len(titles)):
             try:
+                name = titles[j].text
+                if "intern" not in name.lower(): 
+                    # print(name, "not an intern job")
+                    continue
                 link = titles[j].get_attribute("href")
                 i = titles[j]
                 i.click()

@@ -23,7 +23,7 @@ def scrape(link):
     for j in range(len(titles)):
         i = titles[j]
         job_title_info = titles[j].text
-        link = titles[j].get_attribute("href")
+        job_link = titles[j].get_attribute("href")
         i.click()
         time.sleep(5)
         location_info = driver.find_element(By.XPATH, '//div[@class="location"]').text
@@ -31,7 +31,7 @@ def scrape(link):
         #date_posted in Greenhouse
         date_posted = 'NULL'
 
-        values = (job_title_info, location_info, job_info, date_posted, link, 1)
+        values = (job_title_info, location_info, job_info, date_posted, job_link, 1)
         SQL_data.insert(values)
         driver.back() 
         time.sleep(5)

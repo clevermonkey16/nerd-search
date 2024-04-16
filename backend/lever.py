@@ -26,7 +26,6 @@ def scrape(link):
     links = driver.find_elements(By.XPATH, '//a[@class="posting-title"]')
    
     for j in range(len(titles)):
-        i = titles[j]
         job_title_info = titles[j].text
         job_link = links[j].get_attribute("href")
         driver.get(job_link)
@@ -47,4 +46,4 @@ def scrape(link):
 
 
 # Testing out script
-scrape("https://jobs.lever.co/cohere")
+#scrape("https://jobs.lever.co/cohere")

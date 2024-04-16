@@ -38,7 +38,7 @@ def scrape(link):
 
         for j in range(len(titles)):
             try:
-                link = titles[j].get_attribute("href")
+                job_link = titles[j].get_attribute("href")
                 i = titles[j]
                 i.click()
                 time.sleep(2)
@@ -51,7 +51,7 @@ def scrape(link):
                     location_info += f"{location_list[i].text}\n"
                 job_info = driver.find_element(By.XPATH, '//*[@data-automation-id="jobPostingDescription"]').text
                 date_posted = driver.find_element(By.XPATH, '//div[@data-automation-id="postedOn"]').text
-                values = (job_title_info, location_info, job_info, date_posted, link, 1) #if a job is inserted, it's validity is set to 1
+                values = (job_title_info, location_info, job_info, date_posted, job_link, 1) #if a job is inserted, it's validity is set to 1
                 SQL_data.insert(values)
             except:
                 print("nothing to print")

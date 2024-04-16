@@ -7,11 +7,14 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
 
-def scrape(link):
+def scrape(company, link):
     # Set Path for to ChromeDriver
     website = link
 
-    driver = webdriver.Chrome()
+    options = Options()
+    options.add_argument("--headless=new") # Uncomment this line to run headless
+
+    driver = webdriver.Chrome(options=options)
     SQL_data = writedata.SQLWriter("jobs.db")
     driver.get(website)
 
@@ -39,10 +42,15 @@ def scrape(link):
     titles = driver.find_elements(By.XPATH, '//*[contains(@data-test-id, "position-card")]')
 
     for j in range(len(titles)):
+        name = titles[j].text
+        if "intern" not in name.lower(): 
+            # print(name, "not an intern job")
+            continue
         i = titles[j]
         #location_info = location[j].text
         #link = titles[j].get_attribute("href")
         i.click()
+
         time.sleep(3)
         job_link = driver.current_url
         location_info = driver.find_element(By.XPATH, '//*[@class="position-location"]').text
@@ -55,7 +63,7 @@ def scrape(link):
         except:
             date_posted = 'NULL'
 
-        values = (job_title_info, location_info, job_info, date_posted, job_link, 1)
+        values = (company, job_title_info, location_info, job_info, date_posted, job_link, 1)
         SQL_data.insert(values)
 
 
@@ -65,4 +73,4 @@ def scrape(link):
     SQL_data.close()
     driver.quit()
 
-scrape('https://careers.qualcomm.com/careers/?query=intern&location=United%20States&pid=446694599363&domain=qualcomm.com&sort_by=relevance&triggerGoButton=false&triggerGoButton=true')
+#scrape('https://careers.qualcomm.com/careers/?query=intern&location=United%20States&pid=446694599363&domain=qualcomm.com&sort_by=relevance&triggerGoButton=false&triggerGoButton=true')

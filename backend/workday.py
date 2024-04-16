@@ -13,7 +13,7 @@ def scrape(link):
     website = link
 
     options = Options()
-    # options.add_argument("--headless=new") # Uncomment this line to run headless
+    options.add_argument("--headless=new") # Uncomment this line to run headless
 
     driver = webdriver.Chrome(options=options)
     #SQL_data = writedata.SQLWriter("backend\jobs.db")
@@ -33,12 +33,18 @@ def scrape(link):
     flag = True
     while(flag):
         # This is just for error handling
-        for i in range(len(titles)):
-            print(titles[i].text)
+        # for i in range(len(titles)):
+        #     print(titles[i].text)
 
         for j in range(len(titles)):
             try:
+
+                name = titles[j].text
+                if "intern" not in name.lower(): 
+                    # print(name, "not an intern job")
+                    continue
                 job_link = titles[j].get_attribute("href")
+
                 i = titles[j]
                 i.click()
                 time.sleep(2)

@@ -16,14 +16,16 @@ function JobBoard({ jobs }) {
         handleClick={handleClick}
         jobs={jobs}
       />
-      <JobDetails
-        title={selectedJob[0]}
-        company={selectedJob[1]}
-        location={selectedJob[2]}
-        datePosted={selectedJob[3]}
-        jobId={selectedJob[4]}
-        link={selectedJob[4]}
-      />
+      {selectedJob.length !== 0 && (
+        <JobDetails
+          title={selectedJob[0]}
+          company={selectedJob[1]}
+          location={selectedJob[2]}
+          datePosted={selectedJob[3]}
+          jobId={selectedJob[4]}
+          link={selectedJob[4]}
+        />
+      )}
     </div>
   );
 }

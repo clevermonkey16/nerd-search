@@ -18,7 +18,7 @@ function JobOverview({
       <div className="overviewTitle">{title}</div>
       <div>{company}</div>
       <div>{location}</div>
-      <div>{datePosted}</div>
+      <div>{datePosted.replace(/[^0-9\-/]/g, "")}</div>
       <div>{selected}</div>
     </div>
   );

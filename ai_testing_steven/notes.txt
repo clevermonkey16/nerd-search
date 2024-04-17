@@ -1,13 +1,9 @@
-Specifications:
-
-Add columns to database: category, salary, degree, skills
-
 Buckets:
 AI/ML
 Computer Vision
 Graphics
 HCI (UX)
-Data Science
+Data Scientist
 Data Analyst
 Data Engineer
 Hardware
@@ -27,3 +23,4 @@ Software Engineer/Developer
 QA
 Quant
 OS/Compiler
+

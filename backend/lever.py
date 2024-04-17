@@ -12,13 +12,13 @@ def scrape(company, link):
     website = link
 
     options = Options()
-    #options.add_argument("--headless=new") # Uncomment this line to run headless
+    options.add_argument("--headless=new") # Uncomment this line to run headless
 
     driver = webdriver.Chrome(options=options)
     SQL_data = writedata.SQLWriter("jobs.db")
     driver.get(website)
 
-    time.sleep(10)
+    time.sleep(3)
 
     #Titles and links are both lists
     titles = driver.find_elements(By.XPATH, '//a[@class="posting-title"]//h5[@data-qa="posting-name"]')

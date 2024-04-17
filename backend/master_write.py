@@ -20,9 +20,7 @@ def scrape(company, type, link):
     if type == "workday":
         workday.scrape(company, link)
     elif type == "greenhouse":
-        print("no greenhouse")
-        pass
-       # greenhouse.scrape(company, link)
+        greenhouse.scrape(company, link)
     elif type == "eightfold":
         eightfold.scrape(company, link)
     elif type == "lever":

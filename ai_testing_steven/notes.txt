@@ -1,0 +1,3 @@
+Specifications:
+
+Add columns to database: category, salary, degree, skills

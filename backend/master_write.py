@@ -8,6 +8,7 @@
 # 6. Close the database connection
 
 import csv
+import os
 
 import workday
 import greenhouse
@@ -20,9 +21,7 @@ def scrape(company, type, link):
     if type == "workday":
         workday.scrape(company, link)
     elif type == "greenhouse":
-        print("no greenhouse")
-        pass
-       # greenhouse.scrape(company, link)
+        greenhouse.scrape(company, link)
     elif type == "eightfold":
         eightfold.scrape(company, link)
     elif type == "lever":
@@ -39,7 +38,6 @@ if __name__ == "__main__":
     SQL_data.allInvalid()
 
     # 3. Read company links from companies.csv
-    
     with open('companies.csv', 'r') as file:
         csv_reader = csv.reader(file)
         for row in csv_reader:

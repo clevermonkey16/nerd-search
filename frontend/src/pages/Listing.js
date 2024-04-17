@@ -6,6 +6,12 @@ import { useState, useEffect } from "react";
 
 function Listing() {
   const [jobs, setJobs] = useState([]);
+  const [companySearch, setCompanySearch] = useState("");
+
+  const handleCompanyChange = (text) => {
+    setCompanySearch(text);
+    console.log(companySearch);
+  };
 
   useEffect(() => {
     fetch("http://localhost:4000/jobs")
@@ -22,11 +28,15 @@ function Listing() {
         console.error("Error fetching jobs:", error);
       });
   }, []);
+
+  const filteredJobs = jobs.filter((job) =>
+    job[0].toLowerCase().includes(companySearch.toLowerCase())
+  );
   return (
-    <>
-      <SearchBar />
-      <JobBoard jobs={jobs} />
-    </>
+    <div className="mainPage">
+      <SearchBar onCompanyChange={handleCompanyChange} />
+      <JobBoard jobs={filteredJobs} />
+    </div>
   );
 }
 

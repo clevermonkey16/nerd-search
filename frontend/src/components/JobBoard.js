@@ -16,9 +16,8 @@ function JobBoard({ jobs }) {
   ) => {
     setSelectedJob([title, company, location, datePosted, jobId, description]);
   };
-
   return (
-    <div className="horizontalContainer">
+    <div className="horizontalContainer jobBoard">
       <JobOverviewPanel
         handleClick={handleClick}
         jobs={jobs}

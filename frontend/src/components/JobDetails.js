@@ -4,7 +4,6 @@ function JobDetails({
   title,
   company,
   location,
-  pay,
   datePosted,
   jobId,
   link,
@@ -12,20 +11,19 @@ function JobDetails({
 }) {
   return (
     <div className="jobDetails verticalContainer">
-      <div>{title}</div>
-      <div>{company}</div>
+      <div className="detailsTitle">{title}</div>
+      <div className="detailsCompany">{company}</div>
       <div>{location}</div>
-      <div>{pay}</div>
       <div>{datePosted}</div>
-      <div>{description}</div>
-      <div>{jobId}</div>
       <a
+        style={{ marginTop: "0.5rem", marginBottom: "0.5rem" }}
         href={link}
         target="_blank"
         rel="noreferrer"
         className="applyButton">
         Apply
       </a>
+      <div>{description}</div>
     </div>
   );
 }

@@ -51,12 +51,17 @@ function JobOverviewPanel({ handleClick, jobs }) {
       {/* Page Controls */}
       <div className="horizontalContainer pageControls">
         <button
+          className="pageButton"
+          style={{ marginRight: "2rem", marginLeft: "2rem" }}
           onClick={prevPage}
           disabled={currentPage === 1}>
           Previous Page
         </button>
+        <div className="pageNumber">{currentPage}</div>
         <button
+          className="pageButton"
           onClick={nextPage}
+          style={{ marginLeft: "2rem", marginRight: "2rem" }}
           disabled={endIndex >= jobs.length}>
           Next Page
         </button>

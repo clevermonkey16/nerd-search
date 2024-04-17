@@ -18,7 +18,7 @@ def scrape(company, link):
     SQL_data = writedata.SQLWriter("jobs.db")
     driver.get(website)
 
-    time.sleep(3)
+    time.sleep(0.1)
 
     #Titles and links are both lists
     titles = driver.find_elements(By.XPATH, '//a[@class="posting-title"]//h5[@data-qa="posting-name"]')
@@ -36,12 +36,12 @@ def scrape(company, link):
         job_title_info = titles[j].text
         job_link = links[j].get_attribute("href")
         driver.get(job_link)
-        time.sleep(3)
+        time.sleep(0.05)
         location_info = driver.find_element(By.XPATH, '//div[@class="sort-by-time posting-category medium-category-label width-full capitalize-labels location"]').text
         job_info = driver.find_element(By.XPATH, '//div[@class="section-wrapper page-full-width"]').text
         # no date_posted in lever
         date_posted = 'NULL'
-        values = (company, job_title_info, location_info, job_info, date_posted, job_link, 1)
+        values = (company, job_title_info, location_info, job_info, date_posted, job_link, 1, 'na', 'na','na', 0.0)
         SQL_data.insert(values)
         driver.back() 
         time.sleep(3)

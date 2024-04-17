@@ -20,7 +20,7 @@ def scrape(company, link):
     SQL_data = writedata.SQLWriter("jobs.db")
     driver.get(website)
 
-    time.sleep(10)
+    time.sleep(2)
 
     #frame = driver.find_element("xpath", '//frame[@name="main"]')
     #driver.switch_to.frame(frame)
@@ -64,7 +64,7 @@ def scrape(company, link):
                     location_info += f"{location_list[i].text}\n"
                 job_info = driver.find_element(By.XPATH, '//*[@data-automation-id="jobPostingDescription"]').text
                 date_posted = driver.find_element(By.XPATH, '//div[@data-automation-id="postedOn"]').text
-                values = (company, job_title_info, location_info, job_info, date_posted, job_link, 1) #if a job is inserted, it's validity is set to 1
+                values = (company, job_title_info, location_info, job_info, date_posted, job_link, 1, 'na', 'na', 'na', 0.0) #if a job is inserted, it's validity is set to 1
                 SQL_data.insert(values)
             except:
                 print("nothing to print")

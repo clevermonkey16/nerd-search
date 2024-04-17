@@ -14,7 +14,11 @@ class SQLWriter:
                    description  TEXT, 
                    date_posted  TEXT, 
                    link         TEXT UNIQUE,
-                   valid        BIT)""")
+                   valid        BIT,
+                   category     TEXT,
+                   degree       TEXT,
+                   skills       TEXT,
+                   salary       REAL)""")
         print("Connected to the database")
 
     def query(self, sql_command, values = ()):
@@ -26,9 +30,8 @@ class SQLWriter:
 
     def insert(self, values):
         # values is a tuple of (company, title, location, description, date_posted, link, validity(bit)) 
-        
         try:
-            self.query(f"INSERT INTO {self.tableName} VALUES (?, ?, ?, ?, ?, ?, ?)", values)
+            self.query(f"INSERT INTO {self.tableName} VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", values)
         except sqlite3.IntegrityError:
             self.query(f"UPDATE {self.tableName} SET valid = ? WHERE link LIKE ?", [1, values[5]]) #now the job is "verified" if it is a dupe
             print("job_id not unique", values[5])

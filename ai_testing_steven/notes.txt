@@ -1,3 +1,29 @@
 Specifications:
 
 Add columns to database: category, salary, degree, skills
+
+Buckets:
+AI/ML
+Computer Vision
+Graphics
+HCI (UX)
+Data Science
+Data Analyst
+Data Engineer
+Hardware
+Embedded
+Databases
+Security
+Cloud
+Web dev
+IT/SRE
+Game dev
+Networks
+Software Engineer/Developer
+- Front End
+- Back End
+- Full Stack
+- Mobile
+QA
+Quant
+OS/Compiler

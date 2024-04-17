@@ -1,13 +1,107 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  height: 100vh;
+  overflow: hidden;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.horizontalContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.verticalContainer {
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+}
+
+.jobBoard {
+  overflow-y: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+/* Job Overview */
+.jobOverviewPanel {
+  height: 94vh;
+  width: 30rem;
+}
+
+.jobOverview {
+  border: 1px solid gray;
+  padding-left: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.jobOverview:hover {
+  cursor: pointer;
+}
+.jobOverview:not(.selectedJob):hover {
+  background-color: aliceblue;
+}
+.jobOverview:hover .overviewTitle {
+  text-decoration: underline;
+}
+
+.selectedJob {
+  background-color: aqua;
+}
+
+.overviewTitle {
+  font-size: 1.3rem;
+}
+
+/* End Job Overview */
+
+/* Page Controls */
+.pageControls {
+  margin-bottom: 3rem;
+  margin-top: 3rem;
+}
+
+/* End Page Controls */
+
+/* Job Details */
+.jobDetails {
+  width: 39rem;
+  height: 94vh;
+  border: 1px solid gray;
+}
+
+.applyButton {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #007bff; /* Button background color */
+  color: #fff; /* Text color */
+  text-decoration: none; /* Remove underline */
+  border: none; /* Remove border */
+  border-radius: 5px; /* Add border-radius */
+  cursor: pointer; /* Change cursor on hover */
+  width: fit-content;
+}
+
+/* End Job Details */
+
+/* Search Bar */
+.searchBarPanel {
+  height: 4rem;
+  align-items: center;
+  display: flex;
+  padding-left: 22vw;
+  background-color: blue;
+}
+.searchBar {
+  height: 1.6rem;
+}
+/* End Search Bar */

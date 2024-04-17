@@ -25,14 +25,18 @@ class SQLWriter:
         self.query(f"DELETE FROM {self.tableName} WHERE valid LIKE ?", [value])
 
     def insert(self, values):
-        # values is a tuple of (title, location, description, date_posted, job_id, link, validity(bit))
+        # values is a tuple of (company, title, location, description, date_posted, link, validity(bit)) 
+        
         try:
             self.query(f"INSERT INTO {self.tableName} VALUES (?, ?, ?, ?, ?, ?, ?)", values)
         except sqlite3.IntegrityError:
-            self.query(f"UPDATE {self.tableName} SET valid = ? WHERE link LIKE ?", [1, values[4]]) #now the job is "verified" if it is a dupe
-            print("job_id not unique")
+            self.query(f"UPDATE {self.tableName} SET valid = ? WHERE link LIKE ?", [1, values[5]]) #now the job is "verified" if it is a dupe
+            print("job_id not unique", values[5])
         except:
             print("fatal error, entry not inserted")
+    
+        # Laurence: this is just for me to test what errors i have in my webscraping code, ill delete after done
+        #self.query(f"INSERT INTO {self.tableName} VALUES (?, ?, ?, ?, ?, ?)", values)
     
     def allInvalid(self):
         self.query(f"UPDATE {self.tableName} SET valid = ?", [0])

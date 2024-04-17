@@ -63,7 +63,7 @@ def scrape(company, link):
         except:
             date_posted = 'NULL'
 
-        values = (company, job_title_info, location_info, job_info, date_posted, job_link, 1)
+        values = (company, job_title_info, location_info, job_info, date_posted, job_link, 1, 'na', 'na','na', 0.0)
         SQL_data.insert(values)
 
 

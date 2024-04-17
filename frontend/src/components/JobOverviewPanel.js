@@ -16,9 +16,10 @@ function JobOverviewPanel({ handleClick, jobs }) {
     location,
     datePosted,
     onClick,
-    jobId
+    jobId,
+    description
   ) => {
-    handleClick(title, company, location, datePosted, jobId);
+    handleClick(title, company, location, datePosted, jobId, description);
     setSelectedJob(jobId);
   };
 
@@ -34,13 +35,15 @@ function JobOverviewPanel({ handleClick, jobs }) {
       {jobs.slice(startIndex, endIndex).map((job) => {
         return (
           <JobOverview
-            title={job[0]}
-            company="A company"
-            location={job[1]}
-            datePosted={job[3]}
-            jobId={job[4]}
-            selected={selectedJob === job[4] ? true : false}
+            key={job[5]}
+            title={job[1]}
+            company={job[0]}
+            location={job[2]}
+            datePosted={job[4]}
+            jobId={job[5]}
+            selected={selectedJob === job[5] ? true : false}
             onClick={handleClickAndSetJob}
+            description={job[3]}
           />
         );
       })}

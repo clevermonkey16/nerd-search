@@ -6,8 +6,15 @@ import { useState } from "react";
 function JobBoard({ jobs }) {
   const [selectedJob, setSelectedJob] = useState([]);
 
-  const handleClick = (title, company, location, datePosted, jobId) => {
-    setSelectedJob([title, company, location, datePosted, jobId]);
+  const handleClick = (
+    title,
+    company,
+    location,
+    datePosted,
+    jobId,
+    description
+  ) => {
+    setSelectedJob([title, company, location, datePosted, jobId, description]);
   };
 
   return (
@@ -24,6 +31,7 @@ function JobBoard({ jobs }) {
           datePosted={selectedJob[3]}
           jobId={selectedJob[4]}
           link={selectedJob[4]}
+          description={selectedJob[5]}
         />
       )}
     </div>

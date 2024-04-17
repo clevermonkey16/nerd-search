@@ -8,14 +8,16 @@ function JobDetails({
   datePosted,
   jobId,
   link,
+  description,
 }) {
   return (
-    <div className="jobDetails">
+    <div className="jobDetails verticalContainer">
       <div>{title}</div>
       <div>{company}</div>
       <div>{location}</div>
       <div>{pay}</div>
       <div>{datePosted}</div>
+      <div>{description}</div>
       <div>{jobId}</div>
       <a
         href={link}

@@ -1,6 +1,6 @@
 import React from "react";
 
-function SearchBar({ onCompanyChange }) {
+function SearchBar({ onCompanyChange, onLocationChange }) {
   const handleCompanyChange = (event) => {
     // Get the new text from the input field
     const newText = event.target.value;
@@ -8,6 +8,10 @@ function SearchBar({ onCompanyChange }) {
     onCompanyChange(newText);
   };
 
+  const handleLocationChange = (event) => {
+    const newText = event.target.value;
+    onLocationChange(newText);
+  };
   return (
     <div className="searchBarPanel">
       <div style={{ marginRight: "1rem" }}>Search by:</div>
@@ -20,7 +24,7 @@ function SearchBar({ onCompanyChange }) {
       <input
         type="text"
         placeholder="Location"
-        onChange={onCompanyChange} // Call the onChange function passed as a prop
+        onChange={handleLocationChange} // Call the onChange function passed as a prop
         className="searchBar"
       />
     </div>

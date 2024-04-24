@@ -51,11 +51,17 @@ def scrape(company, link):
         #link = titles[j].get_attribute("href")
         i.click()
 
-        time.sleep(3)
+        time.sleep(10)
         job_link = driver.current_url
         location_info = driver.find_element(By.XPATH, '//*[@class="position-location"]').text
         job_title_info = driver.find_element(By.XPATH, '//*[@class="position-title"]').text
-        job_info = driver.find_element(By.XPATH, '//div[@class="position-job-description"]').text
+        job_info_list = driver.find_elements(By.XPATH, '//div[@class="position-job-description"]//p')    
+        job_info = ""
+        for i in range(len(job_info_list)):
+            #print(job_info_list[i].text)
+            job_info += f"{job_info_list[i].text}\n"
+            job_info += "\n"
+  
 
         # from the two eightfold websites, one of them did not have date posted
         try:
@@ -68,9 +74,9 @@ def scrape(company, link):
 
 
         
-    #title.click() 
+    print("Code is done!")
 
     SQL_data.close()
     driver.quit()
 
-#scrape('https://careers.qualcomm.com/careers/?query=intern&location=United%20States&pid=446694599363&domain=qualcomm.com&sort_by=relevance&triggerGoButton=false&triggerGoButton=true')
+#scrape('Qualcomm', 'https://careers.qualcomm.com/careers/?query=intern&location=United%20States&pid=446694599363&domain=qualcomm.com&sort_by=relevance&triggerGoButton=false&triggerGoButton=true')

@@ -38,7 +38,12 @@ def scrape(company, link):
         driver.get(job_link)
         time.sleep(0.05)
         location_info = driver.find_element(By.XPATH, '//div[@class="sort-by-time posting-category medium-category-label width-full capitalize-labels location"]').text
-        job_info = driver.find_element(By.XPATH, '//div[@class="section-wrapper page-full-width"]').text
+        job_info_list = driver.find_elements(By.XPATH, '//*[@data-qa="job-description"]//div')
+        job_info = ""
+        for i in range(len(job_info_list)):
+            print(job_info_list[i].text)
+            job_info += f"{job_info_list[i].text}\n"
+            job_info += "\n"
         # no date_posted in lever
         date_posted = 'NULL'
         values = (company, job_title_info, location_info, job_info, date_posted, job_link, 1, 'na', 'na','na', 0.0)
@@ -52,4 +57,4 @@ def scrape(company, link):
 
 
 # Testing out script
-#scrape("https://jobs.lever.co/cohere")
+#scrape("Cohere", "https://jobs.lever.co/cohere")

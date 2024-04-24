@@ -34,7 +34,12 @@ def scrape(company, link):
         i.click()
         time.sleep(0.05)
         location_info = driver.find_element(By.XPATH, '//div[@class="location"]').text
-        job_info = driver.find_element(By.XPATH, '//div[@id="content"]').text
+        job_info_list = driver.find_elements(By.XPATH, '//div[@id="content"]//p')
+        job_info = ""
+        for i in range(len(job_info_list)):
+            print(job_info_list[i].text)
+            job_info += f"{job_info_list[i].text}\n"
+            job_info += "\n"
         #date_posted in Greenhouse
         date_posted = 'NULL'
 
@@ -47,4 +52,7 @@ def scrape(company, link):
 
     SQL_data.close()
     driver.quit()
+
+
+#scrape('Samsung', 'https://boards.greenhouse.io/samsungsemiconductor')
 

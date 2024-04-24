@@ -5,7 +5,7 @@ import sqlite3
 
 app = Flask(__name__)
 CORS(app)
-DATABASE = "backend/jobs.db"
+DATABASE = "ai_testing_steven/jobs.db"
 
 
 # Connect to the database

@@ -61,16 +61,14 @@ def scrape(company, link):
                 for i in range(len(location_list)):
                     #print(location_list[i].text)
                     location_info += f"{location_list[i].text}\n"
-                job_info = driver.find_element(By.XPATH, '//*[@data-automation-id="jobPostingDescription"]')
-                #job_info_list = driver.find_elements(By.XPATH, '//*[@data-automation-id="jobPostingDescription"]//p')
-                
-                '''
-                job_info = ""
+
+                job_info_list = driver.find_elements(By.XPATH, '//*[@data-automation-id="jobPostingDescription"]//p')
+                job_info = "" 
                 for i in range(len(job_info_list)):
-                    print(job_info_list[i].text)
+                    #print(job_info_list[i].text)
                     job_info += f"{job_info_list[i].text}\n"
                     job_info += "\n"
-                '''
+                
                 
                 date_posted = driver.find_element(By.XPATH, '//div[@data-automation-id="postedOn"]').text
                 values = (company, job_title_info, location_info, job_info, date_posted, job_link, 1, 'na', 'na', 'na', 0.0) #if a job is inserted, it's validity is set to 1

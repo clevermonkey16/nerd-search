@@ -33,7 +33,16 @@ function JobDetails({
         className="applyButton">
         Apply
       </a>
-      <div>{description}</div>
+      <div>
+        {description.split("\n").map((line, index) => {
+          return (
+            <React.Fragment key={index}>
+              {line}
+              {line !== "" && <br />}
+            </React.Fragment>
+          );
+        })}
+      </div>
     </div>
   );
 }

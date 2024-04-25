@@ -1,5 +1,6 @@
 import time
 import writedata
+import wordextractor
 
 from selenium import webdriver 
 from selenium.webdriver.chrome.options import Options
@@ -23,6 +24,7 @@ def scrape(company, link):
     #Titles is a list
     titles = driver.find_elements(By.XPATH, '//a[@data-mapped="true"]')
     
+    #for j in range(len(titles)):
     for j in range(len(titles)):
         name = titles[j].text
         if "intern" not in name.lower(): 
@@ -34,21 +36,25 @@ def scrape(company, link):
         i.click()
         time.sleep(0.05)
         location_info = driver.find_element(By.XPATH, '//div[@class="location"]').text
-        job_info_list = driver.find_elements(By.XPATH, '//div[@id="content"]//p')
+        job_info_list = driver.find_elements(By.XPATH, '//div[@id="content"]')
         job_info = ""
         for i in range(len(job_info_list)):
-            print(job_info_list[i].text)
+            #print(job_info_list[i].text)
             job_info += f"{job_info_list[i].text}\n"
-            job_info += "\n"
+            job_info += "\n\n"
         #date_posted in Greenhouse
         date_posted = 'NULL'
 
-        values = (company, job_title_info, location_info, job_info, date_posted, job_link, 1, 'na', 'na','na', 0.0)
+        degree_info = wordextractor.degreeextract(job_info)
+        salary_info = wordextractor.salaryextract(job_info)
+        
+        values = (company, job_title_info, location_info, job_info, date_posted, job_link, 1, 'NA', degree_info, 'NA', salary_info)
         SQL_data.insert(values)
         driver.back() 
         #time.sleep(0.2)
         
     #title.click() 
+    print("Code is done!")
 
     SQL_data.close()
     driver.quit()

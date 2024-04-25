@@ -1,5 +1,6 @@
 import time
 import writedata
+import wordextractor
 
 from selenium import webdriver 
 from selenium.webdriver.chrome.options import Options
@@ -71,7 +72,10 @@ def scrape(company, link):
                 
                 
                 date_posted = driver.find_element(By.XPATH, '//div[@data-automation-id="postedOn"]').text
-                values = (company, job_title_info, location_info, job_info, date_posted, job_link, 1, 'na', 'na', 'na', 0.0) #if a job is inserted, it's validity is set to 1
+                degree_info = wordextractor.degreeextract(job_info)
+                
+                salary_info = wordextractor.salaryextract(job_info)
+                values = (company, job_title_info, location_info, job_info, date_posted, job_link, 1, 'na', degree_info, 'na', salary_info) #if a job is inserted, it's validity is set to 1
                 SQL_data.insert(values)
             except:
                 print("nothing to print")
@@ -92,4 +96,4 @@ def scrape(company, link):
     SQL_data.close()
     driver.quit()
 
-#scrape('Nvidia', 'https://nvidia.wd5.myworkdayjobs.com/NVIDIAExternalCareerSite?q=intern&locationHierarchy1=2fcb99c455831013ea52fb338f2932d8')
+scrape('Nvidia', 'https://nvidia.wd5.myworkdayjobs.com/NVIDIAExternalCareerSite?q=intern&locationHierarchy1=2fcb99c455831013ea52fb338f2932d8')

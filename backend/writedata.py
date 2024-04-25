@@ -18,7 +18,7 @@ class SQLWriter:
                    category     TEXT,
                    degree       TEXT,
                    skills       TEXT,
-                   salary       REAL)""")
+                   salary       TEXT)""")
         print("Connected to the database")
 
     def query(self, sql_command, values = ()):

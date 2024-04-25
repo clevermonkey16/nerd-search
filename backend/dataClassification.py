@@ -32,6 +32,14 @@ def kWordSearch(title):
                 'security': ["security", "cyber"], 
                 'ui_ux': ["frontend", "ui", "ux"]}
     
+    for i in keywords: #the keyword categories
+        for j in range(len(keywords[i])): #
+    #me being dumb:
+    '''for i in keywords:
+        for j in range(len(keywords[i])):
+            print(keywords[i][j])'''
+    
 
 DATABASE = "backend/jobs.db"
 
+kWordSearch("dog")

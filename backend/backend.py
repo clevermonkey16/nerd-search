@@ -24,7 +24,7 @@ def close_connection(exception):
         db.close()
 
 
-@app.route("/jobs", methods=["GET"])
+@app.route("/", methods=["GET"])
 def get_jobs():
     cursor = get_db().cursor()
     cursor.execute("SELECT * FROM jobs")

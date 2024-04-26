@@ -42,13 +42,16 @@ def scrape(company, link):
             #print(job_info_list[i].text)
             job_info += f"{job_info_list[i].text}\n"
             job_info += "\n\n"
+        print(job_info)
         #date_posted in Greenhouse
         date_posted = 'NULL'
 
         degree_info = wordextractor.degreeextract(job_info)
         salary_info = wordextractor.salaryextract(job_info)
+        skills_info = wordextractor.skillsextract(job_info)
         
-        values = (company, job_title_info, location_info, job_info, date_posted, job_link, 1, 'NA', degree_info, 'NA', salary_info)
+        
+        values = (company, job_title_info, location_info, job_info, date_posted, job_link, 1, 'NA', degree_info, skills_info, salary_info)
         SQL_data.insert(values)
         driver.back() 
         #time.sleep(0.2)

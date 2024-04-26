@@ -1,5 +1,6 @@
 import time
 import writedata
+import wordextractor
 
 from selenium import webdriver 
 from selenium.webdriver.chrome.options import Options
@@ -41,20 +42,23 @@ def scrape(company, link):
         job_info_list = driver.find_elements(By.XPATH, '//*[@data-qa="job-description"]//div')
         job_info = ""
         for i in range(len(job_info_list)):
-            print(job_info_list[i].text)
+            #print(job_info_list[i].text)
             job_info += f"{job_info_list[i].text}\n"
             job_info += "\n"
         # no date_posted in lever
         date_posted = 'NULL'
-        values = (company, job_title_info, location_info, job_info, date_posted, job_link, 1, 'na', 'na','na', 0.0)
+        degree_info = wordextractor.degreeextract(job_info)
+        salary_info = wordextractor.salaryextract(job_info)
+        values = (company, job_title_info, location_info, job_info, date_posted, job_link, 1, 'na', degree_info,'na', salary_info)
         SQL_data.insert(values)
         driver.back() 
         time.sleep(3)
 
     #title.click() 
+    print("code is done!")
     SQL_data.close()
     driver.quit()
 
 
 # Testing out script
-#scrape("Cohere", "https://jobs.lever.co/cohere")
+scrape("Cohere", "https://jobs.lever.co/cohere")

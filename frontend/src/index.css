@@ -8,7 +8,7 @@ body {
   height: 100vh;
   overflow: hidden;
   font-family: "Source Sans 3";
-  background-color: #6a93d9;
+  background-color: #5B7C99;
 }
 
 code {
@@ -42,9 +42,11 @@ code {
 .jobOverviewPanel {
   width: 30rem;
   border: 1px solid gray;
-  background-color: #da84b1;
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: 10px;
 }
-
 .jobOverview {
   border: 1px solid rgba(128, 128, 128, 0.5);
   padding-left: 1rem;
@@ -149,7 +151,7 @@ code {
   display: flex;
   padding-left: 10vw;
   padding-right: 2vw;
-  background-color: #8458b3;
+  background-color: #6699CC;
   font-size: 1.3rem;
   font-weight: 500;
   color: white;

@@ -78,5 +78,5 @@ def get_jobs():
     return jsonify(jobs)
 
 
-# if __name__ == "__main__":
-#    app.run(debug=True, port=4000)
+if __name__ == "__main__":
+    app.run(debug=True, port=4000)

@@ -71,17 +71,20 @@ class data_classify:
                              'systems': ["systems engineer", "system engineer"],
                              'ui_ux': ["frontend", "ui", "ux", "front-end"]}
             
-            #self.techModel = pickle.load(open("models/tech.sav",'rb'))
-            #self.classModel = pickle.load(open("backend/models/class.sav", 'rb'))
+            self.techModel = pickle.load(open("models/tech.sav",'rb'))
+            self.classModel = pickle.load(open("models/class.sav", 'rb'))
+            self.techVectorizer = pickle.load(open("models/vectorizer_noTech.sav",'rb'))
+            self.classVectorizer = pickle.load(open("models/vectorizer.sav", 'rb'))
 
             self.lemmatizer = WordNetLemmatizer()
             self.stemmer = PorterStemmer()
 
+            """
             vectorizer, vectorizer_noTech, classModel, techModel = modelTraining.trainModel()
             self.classVectorizer = vectorizer
             self.techVectorizer = vectorizer_noTech
             self.classModel = classModel
-            self.techModel = techModel
+            self.techModel = techModel"""
 
             print("welcome to blackbox 1.0")
     

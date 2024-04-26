@@ -186,7 +186,9 @@ function Listing() {
         });
       });
     };
-    fetch("http://localhost:4000/jobs")
+    const url = "http://localhost:4000";
+    //const url = "https://psych-website.onrender.com";
+    fetch(url + "/jobs")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Failed to fetch jobs");

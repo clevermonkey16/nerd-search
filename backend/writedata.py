@@ -52,6 +52,12 @@ class SQLWriter:
             self.cursor.execute(f"DROP TABLE {self.tableName}")
         else:
             print("check your nuclear launch codes")
+    
+    def updateCategory(self, link, category):
+        self.query(f"UPDATE {self.tableName} SET category = ? WHERE link LIKE ?", [category, link])
+
+    def updateValid(self, link, valid):
+        self.query(f"UPDATE {self.tableName} SET valid = ? WHERE link LIKE ?", [valid, link])
 
     def close(self):
         self.connection.close()

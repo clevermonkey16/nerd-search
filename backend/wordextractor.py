@@ -92,7 +92,9 @@ def skillsextract(text):
                      'PowerPoint', 'Excel', 'MicrosoftOffice', 'Tableau', 'Linux', 'Unix', 'Csharp', 'CSS', 'HTML', 'Javascript', 
                      'Reactjs', 'React', 'PHP', 'Ruby', 'Swift', 'TypeScript', 'Ajax', 'JSON', 'MVC', 'Redux', 'API', 'Flask',
                      'ML', 'Django', 'Vue', 'AngularJS', 'NoSQL', 'MongoDB', 'Matlab', 'NodeJS', 'MWord', 'PyTorch', 'SckitLearn'
-                     'TensorFlow', 'Snowflake', 'Apache', 'BigQuery', 'Azure', 'Windows', 'IDS', 'IPS', 'QA', 'RDBMS', 'Node']
+                     'TensorFlow', 'Snowflake', 'Apache', 'BigQuery', 'Azure', 'Windows', 'IDS', 'IPS', 'QA', 'RDBMS', 'Node'
+                     'Unity3D', 'research', 'Maya', 'Unreal', 'UI', 'UX', 'Sketch', 'Figma', 'Adobe', 'Jira', 'Confluence',
+                     'BI', 'CAPM', 'PMP', 'CSM', 'GPU', 'Modeling', 'PostgreSQL']
     skills_list = ""
     
     for element in skills_keywords:

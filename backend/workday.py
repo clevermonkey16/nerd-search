@@ -68,7 +68,7 @@ def scrape(company, link):
                 for i in range(len(job_info_list)):
                     #print(job_info_list[i].text)
                     job_info += f"{job_info_list[i].text}\n"
-                    job_info += "\n"
+                    job_info += "\n\n"
                 
                 
                 date_posted = driver.find_element(By.XPATH, '//div[@data-automation-id="postedOn"]').text

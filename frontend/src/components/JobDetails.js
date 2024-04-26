@@ -45,6 +45,9 @@ function JobDetails({
         })}
       </div>
       <div>{datePosted === "30" ? "Posted 30+ days ago" : datePosted}</div>
+      {degree !== "NA" && <div>Degree: {degree}</div>}
+      {skills !== "NA" && <div>Skills: {skills}</div>}
+      {salary !== "NA" && <div>Salary: {salary}</div>}
       <a
         style={{ marginTop: "0.5rem", marginBottom: "0.5rem" }}
         href={link}
@@ -63,9 +66,6 @@ function JobDetails({
           );
         })}
       </div>
-      <div>{degree}</div>
-      <div>{skills}</div>
-      <div>{salary}</div>
     </div>
   );
 }

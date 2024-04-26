@@ -66,7 +66,7 @@ function SearchBar({ onCompanyChange, onLocationChange, addTag, removeTag }) {
     const suggestions = availableTags.filter((tag) =>
       tag.toLowerCase().includes(inputText.toLowerCase())
     );
-    setSuggestions(suggestions);
+    setSuggestions(suggestions.sort());
     setShowDropdown(true);
   };
 
@@ -83,7 +83,7 @@ function SearchBar({ onCompanyChange, onLocationChange, addTag, removeTag }) {
     const suggestions = availableTags.filter((tag) =>
       tag.toLowerCase().includes(tagSearchValue.toLowerCase())
     );
-    setSuggestions(suggestions);
+    setSuggestions(suggestions.sort());
     const handleClickAnywhere = (event) => {
       const searchBarPanel = document.querySelector(".dropdown");
       // Check if the clicked element is inside the component

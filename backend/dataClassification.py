@@ -55,10 +55,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 class data_classify:
     #this is stupidly slow
     def __init__(self):
-            self.keywords = {'backend': ["software engineer", "software developer",
-                                    "java developer", "c++ developer", 
-                                    "javascript developer", "back-end developer",
-                                    "backend developer", "backend", "back-end", "back end"],
+            self.keywords = {'backend': ["backend", "back-end", "back end"],
                              'cloud': ["cloud", "azure"],
                              'data': ["data analyst", "data engineer", "data scientist"],
                              'databases': ["database", "data architect", "aws", "db"],
@@ -67,12 +64,12 @@ class data_classify:
                              'fullstack': ["full stack", "fullstack", "full-stack"],
                              'it_devops': ["devops", "i.t.", "it", "information technology"],
                              'mobile': ["android", "ios", "mobile"],
-                             'networks': ["network", "data communication"],
+                             'networks': ["network", "data communication", "networks"],
                              'pm': ["project manager", "project coordinator", "pm"],
-                             'qa': ["test architect", "test engineer", "qa", "quality assurance", "quality", "tester", "test"],
+                             'qa': ["qa", "quality", "tester", "test"],
                              'security': ["security", "cyber"],
                              'systems': ["systems engineer", "system engineer"],
-                             'ui_ux': ["frontend", "ui", "ux"]}
+                             'ui_ux': ["frontend", "ui", "ux", "front-end"]}
             
             #self.techModel = pickle.load(open("models/tech.sav",'rb'))
             #self.classModel = pickle.load(open("backend/models/class.sav", 'rb'))
@@ -102,19 +99,23 @@ class data_classify:
         stop_words = set(stopwords.words("english"))
         word_tokens = word_tokenize(text)
         filtered_text = [word for word in word_tokens if word not in stop_words]
-        return filtered_text
+        return " ".join(filtered_text)
 
     def stem_words(self,text):
         word_tokens = word_tokenize(text)
         stems = [self.stemmer.stem(word) for word in word_tokens]
-        return stems
+        return " ".join(stems)
     
     def lemma_words(self,text):
         word_tokens = word_tokenize(text)
         lemmatized_words = [self.lemmatizer.lemmatize(word) for word in text]
-        return lemmatized_words
+        #print(lemmatized_words)
+        return " ".join(lemmatized_words)
+    
+    def remove_whitespace(self,text):
+        return " ".join(text.split())
 
-    def preProcess(self, phrase, type):
+    def preProcess(self, phrase, typ):
         
         processPhrase = phrase #change this later on
         
@@ -122,31 +123,39 @@ class data_classify:
         processPhrase = self.remove_special_characters(processPhrase)
         processPhrase = self.remove_punctuation(processPhrase)
         processPhrase = self.remove_stopwords(processPhrase) 
+        processPhrase = self.remove_whitespace(processPhrase) 
         
-        #processPhrase = self.stem_words(processPhrase)
+        processPhrase = self.stem_words(processPhrase)
+        #print(processPhrase)
         #processPhrase = self.lemma_words(processPhrase) 
-        #processPhrase = np.array(processPhrase).reshape(1,-1)
-        #return processPhrase
 
-        if type == "class":
+        #print(type(processPhrase))
+
+        #processPhrase = ' '.join(processPhrase)
+        processPhrase = [processPhrase]
+
+        print(processPhrase)
+
+        if typ == "class":
             phraseVectorized = self.classVectorizer.transform(processPhrase).toarray()
             phrase_df = pd.DataFrame(phraseVectorized)
-        elif type == "tech":
+        elif typ == "tech":
             phraseVectorized = self.techVectorizer.transform(processPhrase).toarray()
             phrase_df = pd.DataFrame(phraseVectorized)
 
         return phrase_df
      
     def kWordSearch(self, title):
+        title = title.lower()
         for i in self.keywords: #the keyword categories
-            for j in range(len(self.keywords[i])-1): #goes through the array belonging to the categories
-                if(title.find(self.keywords[i][j]) != -1): #is found inside the phrase
+            for j in range(len(self.keywords[i])): #goes through the array belonging to the categories
+                if((self.keywords[i][j]) in title): #is found inside the phrase
                     return i
                 
         return "no_kClass" #"no keyword class"
 
     def isTech(self, phrase):
-        prediction = self.techModel.predict(self.preProcess(phrase), "tech")
+        prediction = self.techModel.predict(self.preProcess(phrase,"tech"))
         #prediction = self.techModel.predict(phrase)
         return prediction
 
@@ -158,8 +167,76 @@ if __name__ == "__main__":
     testClass = data_classify()
     #print(testClass.isTech("help me to name it"))
     #print(testClass.preProcess("help me to name it, either way it will change"))
-    pred = testClass.classify("help me to name it, either way it will change")
+    pred = testClass.classify("""Y ou will…
+
+Participate in and successfully complete structured classroom workshops specific to core CCNA preparation administered by a Meraki instructor
+Work through lab assignments via Packet Tracer, NetAcad labs, and Meraki troubleshooting labs to learn the foundations of networking and troubleshooting
+Gain an understanding of the networking field by participating and engaging in various courses
+Assist with lab testing work as needed for Meraki products
+Identify issues suitable for entry in the Meraki Knowledge Base
+Effectively communicate with third parties such as partners and customers regarding technical issues and customer service inquiries, both orally and in writing
+Collaborate with other Support team members to fix network outages, misconfigurations, and complex networking issues of customers’ devices
+Read and analyze packet capture using Wireshark
+
+You are….
+
+Pursuing an associate's degree or are a Junior or senior pursuing a bachelor's degree with a computer science, information technology, networking, systems administration, or a related field from an accredited university. Individuals who have completed a relevant networking BootCamp within the last 6 months will also be considered. Individuals pursuing a master’s degree will not be considered 
+Hardworking and interested in exploring the Networking field
+Passionate to assist and problem-solve with customers
+Able to strategically and critically think about how to look for solutions, willing to be pushed outside your knowledge areas, and eager to learn and find solutions
+An efficient communicator and problem-solver
+Networking certifications a plus: CCNA, CCNP CWNA, etc. 
+Experience supporting or testing LANs, VLANs, WLANs, VPNs, NAT devices, &/or DHCP servers is a plus
+Comprehension of networking protocols, including TCP, STP, ARP, Ethernet, OSPF, etc. is a plus
+Preferred experiences within helpdesk, technical call center, desktop support, or past networking experiences preferred, but not required. 
+Authorized to work in the U.S. without requiring sponsorship now or in the future 
+
+Qualifications
+
+Basic understanding of networking fundamentals, e.g. be able to explain the functions of and differences among the link, network, transport, and application layers
+A passion to assist and problem-solve with our customers
+Outstanding account management, follow-through, and problem-solving skills
+Resourcefulness and attention to detail
+Excellent communication skills, both written and verbal
+""")
     print(pred)
+
+    techCheck = testClass.isTech("""Y ou will…
+
+Participate in and successfully complete structured classroom workshops specific to core CCNA preparation administered by a Meraki instructor
+Work through lab assignments via Packet Tracer, NetAcad labs, and Meraki troubleshooting labs to learn the foundations of networking and troubleshooting
+Gain an understanding of the networking field by participating and engaging in various courses
+Assist with lab testing work as needed for Meraki products
+Identify issues suitable for entry in the Meraki Knowledge Base
+Effectively communicate with third parties such as partners and customers regarding technical issues and customer service inquiries, both orally and in writing
+Collaborate with other Support team members to fix network outages, misconfigurations, and complex networking issues of customers’ devices
+Read and analyze packet capture using Wireshark
+
+You are….
+
+Pursuing an associate's degree or are a Junior or senior pursuing a bachelor's degree with a computer science, information technology, networking, systems administration, or a related field from an accredited university. Individuals who have completed a relevant networking BootCamp within the last 6 months will also be considered. Individuals pursuing a master’s degree will not be considered 
+Hardworking and interested in exploring the Networking field
+Passionate to assist and problem-solve with customers
+Able to strategically and critically think about how to look for solutions, willing to be pushed outside your knowledge areas, and eager to learn and find solutions
+An efficient communicator and problem-solver
+Networking certifications a plus: CCNA, CCNP CWNA, etc. 
+Experience supporting or testing LANs, VLANs, WLANs, VPNs, NAT devices, &/or DHCP servers is a plus
+Comprehension of networking protocols, including TCP, STP, ARP, Ethernet, OSPF, etc. is a plus
+Preferred experiences within helpdesk, technical call center, desktop support, or past networking experiences preferred, but not required. 
+Authorized to work in the U.S. without requiring sponsorship now or in the future 
+
+Qualifications
+
+Basic understanding of networking fundamentals, e.g. be able to explain the functions of and differences among the link, network, transport, and application layers
+A passion to assist and problem-solve with our customers
+Outstanding account management, follow-through, and problem-solving skills
+Resourcefulness and attention to detail
+Excellent communication skills, both written and verbal
+""")
+    print(techCheck)
+
+    wordSearch = testClass.kWordSearch("Network Support Engineering Intern - Fall 2024 (Meraki)")
+    print(wordSearch)
 
 #we should probably double-triple classify based on kwordsearch
 #classModel = "backend/class.sav"

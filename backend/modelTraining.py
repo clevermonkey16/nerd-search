@@ -93,14 +93,14 @@ def trainModel():
     tech_training = tech_training.applymap(lambda x: remove_whitespace(x) if isinstance(x, str) else x)
     tech_training = tech_training.applymap(lambda x: remove_stopwords(x) if isinstance(x, str) else x)
     tech_training = tech_training.applymap(lambda x: stem_words(x) if isinstance(x, str) else x)
-    tech_training = tech_training.applymap(lambda x: lemma_words(x) if isinstance(x, str) else x)
+    #tech_training = tech_training.applymap(lambda x: lemma_words(x) if isinstance(x, str) else x)
 
     notech_training = notech_training.applymap(lambda x: remove_special_characters(x) if isinstance(x, str) else x)
     notech_training = notech_training.applymap(lambda x: remove_punctuation (x) if isinstance(x, str) else x)
     notech_training = notech_training.applymap(lambda x: remove_whitespace(x) if isinstance(x, str) else x)
     notech_training = notech_training.applymap(lambda x: remove_stopwords(x) if isinstance(x, str) else x)
     notech_training = notech_training.applymap(lambda x: stem_words(x) if isinstance(x, str) else x)
-    notech_training = notech_training.applymap(lambda x: lemma_words(x) if isinstance(x, str) else x)
+    #notech_training = notech_training.applymap(lambda x: lemma_words(x) if isinstance(x, str) else x)
 
     # Combining both job title and job description
     tech_training['combined'] = tech_training['jobtitle'] + tech_training['jobdescription']

@@ -38,6 +38,20 @@ def list_folders():
     return jsonify(folders)
 
 
+@app.route("/files")
+def list_files():
+    # Get the path to the current directory
+    current_directory = os.path.dirname(os.path.realpath(__file__))
+    # Get the list of files in the current directory
+    files = [
+        file
+        for file in os.listdir(current_directory)
+        if os.path.isfile(os.path.join(current_directory, file))
+    ]
+    # Return the list of files as JSON data
+    return jsonify(files)
+
+
 @app.route("/jobs", methods=["GET"])
 def get_jobs():
     cursor = get_db().cursor()

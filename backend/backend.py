@@ -2,10 +2,11 @@ from flask import Flask, jsonify, g
 from flask_cors import CORS
 from writedata import SQLWriter
 import sqlite3
+import os
 
 app = Flask(__name__)
 CORS(app)
-DATABASE = "/backend/jobs.db"
+DATABASE = "/jobs.db"
 
 
 # Connect to the database
@@ -27,6 +28,14 @@ def close_connection(exception):
 @app.route("/")
 def hello_world():
     return "Hello, World!"
+
+
+@app.route("/folders")
+def list_folders():
+    # Get the list of folders in the current directory
+    folders = [folder for folder in os.listdir(".") if os.path.isdir(folder)]
+    # Return the list of folders as JSON data
+    return jsonify(folders)
 
 
 @app.route("/jobs", methods=["GET"])

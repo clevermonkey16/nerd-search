@@ -134,7 +134,7 @@ class data_classify:
         #processPhrase = ' '.join(processPhrase)
         processPhrase = [processPhrase]
 
-        print(processPhrase)
+        #print(processPhrase)
 
         if typ == "class":
             phraseVectorized = self.classVectorizer.transform(processPhrase).toarray()
@@ -157,11 +157,11 @@ class data_classify:
     def isTech(self, phrase):
         prediction = self.techModel.predict(self.preProcess(phrase,"tech"))
         #prediction = self.techModel.predict(phrase)
-        return prediction
+        return prediction[0]
 
     def classify(self, phrase):
         prediction = self.classModel.predict(self.preProcess(phrase,"class"))
-        return prediction
+        return prediction[0]
 
 if __name__ == "__main__":
     testClass = data_classify()

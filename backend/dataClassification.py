@@ -25,6 +25,7 @@
 # NOTE: Keyword search goes at the top of the blackbox classifier
 
 from writedata import SQLWriter
+import modelTraining
 
 import pickle
 
@@ -51,12 +52,6 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 
 # remove keyfault stopwords
 
-def remove_stopwords(text):
-    stop_words = set(stopwords.words("english"))
-    word_tokens = word_tokenize(text)
-    filtered_text = [word for word in word_tokens if word not in stop_words]
-    return filtered_text
-
 class data_classify:
     #this is stupidly slow
     def __init__(self):
@@ -79,13 +74,17 @@ class data_classify:
                              'systems': ["systems engineer", "system engineer"],
                              'ui_ux': ["frontend", "ui", "ux"]}
             
-            self.techModel = pickle.load(open("models/tech.sav",'rb'))
+            #self.techModel = pickle.load(open("models/tech.sav",'rb'))
             #self.classModel = pickle.load(open("backend/models/class.sav", 'rb'))
 
             self.lemmatizer = WordNetLemmatizer()
             self.stemmer = PorterStemmer()
 
-            self.tfidf_vectorizer = TfidfVectorizer()
+            vectorizer, vectorizer_noTech, classModel, techModel = modelTraining.trainModel()
+            self.classVectorizer = vectorizer
+            self.techVectorizer = vectorizer_noTech
+            self.classModel = classModel
+            self.techModel = techModel
 
             print("welcome to blackbox 1.0")
     
@@ -115,22 +114,28 @@ class data_classify:
         lemmatized_words = [self.lemmatizer.lemmatize(word) for word in text]
         return lemmatized_words
 
-    def preProcess(self, phrase):
+    def preProcess(self, phrase, type):
+        
         processPhrase = phrase #change this later on
-
-        processPhrase = processPhrase.lower()
+        
+        #processPhrase = processPhrase.lower()
         processPhrase = self.remove_special_characters(processPhrase)
         processPhrase = self.remove_punctuation(processPhrase)
         processPhrase = self.remove_stopwords(processPhrase) 
+        
         #processPhrase = self.stem_words(processPhrase)
         #processPhrase = self.lemma_words(processPhrase) 
-
+        #processPhrase = np.array(processPhrase).reshape(1,-1)
         #return processPhrase
-        phraseVectorized = self.tfidf_vectorizer.fit_transform(processPhrase).toarray()
-        phraseVectorized = phraseVectorized.reshape(1,-1)
-        #phrase_df = pd.DataFrame(phraseVectorized)
 
-        return phraseVectorized
+        if type == "class":
+            phraseVectorized = self.classVectorizer.transform(processPhrase).toarray()
+            phrase_df = pd.DataFrame(phraseVectorized)
+        elif type == "tech":
+            phraseVectorized = self.techVectorizer.transform(processPhrase).toarray()
+            phrase_df = pd.DataFrame(phraseVectorized)
+
+        return phrase_df
      
     def kWordSearch(self, title):
         for i in self.keywords: #the keyword categories
@@ -141,19 +146,19 @@ class data_classify:
         return "no_kClass" #"no keyword class"
 
     def isTech(self, phrase):
-        prediction = self.techModel.predict(self.preProcess(phrase))
+        prediction = self.techModel.predict(self.preProcess(phrase), "tech")
         #prediction = self.techModel.predict(phrase)
         return prediction
 
     def classify(self, phrase):
-        pass
-    #DATABASE = "backend/jobs.db"
+        prediction = self.classModel.predict(self.preProcess(phrase,"class"))
+        return prediction
 
 if __name__ == "__main__":
     testClass = data_classify()
     #print(testClass.isTech("help me to name it"))
-    print(testClass.preProcess("help me to name it, either way it will change"))
-    pred = testClass.isTech("help me to name it, either way it will change")
+    #print(testClass.preProcess("help me to name it, either way it will change"))
+    pred = testClass.classify("help me to name it, either way it will change")
     print(pred)
 
 #we should probably double-triple classify based on kwordsearch

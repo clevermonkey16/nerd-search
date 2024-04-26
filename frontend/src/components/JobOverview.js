@@ -8,9 +8,23 @@ function JobOverview({
   jobId,
   selected,
   description,
+  degree,
+  skills,
+  salary,
 }) {
   const handleClick = () => {
-    onClick(title, company, location, datePosted, onClick, jobId, description);
+    onClick(
+      title,
+      company,
+      location,
+      datePosted,
+      onClick,
+      jobId,
+      description,
+      degree,
+      skills,
+      salary
+    );
   };
   return (
     <div

@@ -12,17 +12,21 @@ function Listing() {
 
   const handleCompanyChange = (text) => {
     setCompanySearch(text);
+    setCurrentPage(1);
   };
   const handleLocationChange = (text) => {
     setLocationSearch(text);
+    setCurrentPage(1);
   };
 
   const addTag = (tag) => {
     setTags([...tags, tag]);
+    setCurrentPage(1);
     // Include logic to apply the tag to your search criteria
   };
   const removeTag = (removedTag) => {
     setTags(tags.filter((tag) => tag !== removedTag));
+    setCurrentPage(1);
   };
 
   useEffect(() => {
@@ -187,8 +191,8 @@ function Listing() {
       });
     };
 
-    //const url = "http://localhost:4000";
-    const url = "https://nerd-search-backend.onrender.com";
+    const url = "http://localhost:4000";
+    //const url = "https://nerd-search-backend.onrender.com";
 
     fetch(url + "/jobs")
       .then((response) => {
@@ -282,6 +286,19 @@ function Listing() {
           .includes(locationSearch.toLowerCase())) &&
       (tags.length === 0 || tags.includes(job[7]))
   );
+
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const itemsPerPage = 10;
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const nextPage = () => {
+    setCurrentPage(currentPage + 1);
+  };
+
+  const prevPage = () => {
+    setCurrentPage(currentPage - 1);
+  };
   return (
     <div className="mainPage">
       <SearchBar
@@ -290,7 +307,14 @@ function Listing() {
         addTag={addTag}
         removeTag={removeTag}
       />
-      <JobBoard jobs={filteredJobs} />
+      <JobBoard
+        jobs={filteredJobs}
+        startIndex={startIndex}
+        endIndex={endIndex}
+        onNextClick={nextPage}
+        onPrevClick={prevPage}
+        currentPage={currentPage}
+      />
     </div>
   );
 }

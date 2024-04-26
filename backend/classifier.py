@@ -1,5 +1,5 @@
 import writedata
-from dataClassification import data_classify as black_box
+#from dataClassification import data_classify as black_box
 
 def classify():
     # 1. Connect to the database
@@ -42,7 +42,7 @@ def classify():
 if __name__ == "__main__":
     SQL_data = writedata.SQLWriter("jobs.db")
 
-    SQL_data.updateCategory("https://nvidia.wd5.myworkdayjobs.com/en-US/NVIDIAExternalCareerSite/job/US-CA-Santa-Clara/Research-Intern--ASIC-and-VLSI---Summer-2024_JR1974986?q=intern&locationHierarchy1=2fcb99c455831013ea52fb338f2932d8", "test")
+    SQL_data.updateCategory("https://nvidia.wd5.myworkdayjobs.com/en-US/NVIDIAExternalCareerSite/job/US-CA-Santa-Clara/Research-Intern--ASIC-and-VLSI---Summer-2024_JR1974986?q=intern&locationHierarchy1=2fcb99c455831013ea52fb338f2932d8", "na")
     SQL_data.close()
 
-    classify()
+    #classify()

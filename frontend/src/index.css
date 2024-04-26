@@ -8,6 +8,7 @@ body {
   height: 100vh;
   overflow: hidden;
   font-family: "Source Sans 3";
+  background-color: #5b7c99;
 }
 
 code {
@@ -35,14 +36,17 @@ code {
 }
 
 .jobBoard {
-  height: 94vh;
+  height: 92vh;
+  border-radius: 10px;
+  margin-top: 10px;
 }
 /* Job Overview */
 .jobOverviewPanel {
   width: 30rem;
   border: 1px solid gray;
+  background-color: #ffffff;
+  padding: 20px;
 }
-
 .jobOverview {
   border: 1px solid rgba(128, 128, 128, 0.5);
   padding-left: 1rem;
@@ -67,7 +71,7 @@ code {
 
 .overviewTitle {
   font-size: 1.6rem;
-  color: #4169e1;
+  color: #8458b3;
   font-weight: 500rem;
 }
 
@@ -113,12 +117,13 @@ code {
   padding-right: 1rem;
   padding-top: 1.5rem;
   padding-bottom: 1rem;
+  background-color: #ffffff;
 }
 
 .applyButton {
   display: inline-block;
   padding: 10px 20px;
-  background-color: #007bff; /* Button background color */
+  background-color: #8458b3; /* Button background color */
   color: #fff; /* Text color */
   text-decoration: none; /* Remove underline */
   border: none; /* Remove border */
@@ -144,15 +149,40 @@ code {
   height: 7rem;
   align-items: center;
   display: flex;
-  padding-left: 22vw;
-  background-color: #007bff;
+  padding-left: 10vw;
+  padding-right: 2vw;
+  background-color: #6699cc;
   font-size: 1.3rem;
   font-weight: 500;
   color: white;
 }
 .searchBar {
-  height: 1.6rem;
+  height: 1.8rem;
   margin-right: 1rem;
   border-radius: 8px;
 }
+.tag {
+  display: inline-block;
+  background-color: grey;
+  border-radius: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  margin-right: 0.5rem;
+  margin-top: 0.4rem;
+  margin-bottom: 0.4rem;
+  border-radius: 10px;
+  font-size: 1rem;
+}
+
+.tag span {
+  margin-right: 0.5rem;
+}
+
+.tag button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  color: white;
+}
+
 /* End Search Bar */

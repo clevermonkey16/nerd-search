@@ -12,7 +12,6 @@ function JobOverview({
   const handleClick = () => {
     onClick(title, company, location, datePosted, onClick, jobId, description);
   };
-  console.log(location);
   return (
     <div
       className={`jobOverview ${selected ? "selectedJob" : ""}`}

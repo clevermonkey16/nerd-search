@@ -1,5 +1,6 @@
 import time
 import writedata
+import wordextractor
 
 from selenium import webdriver 
 from selenium.webdriver.chrome.options import Options
@@ -62,7 +63,7 @@ def scrape(company, link):
                     #print(location_list[i].text)
                     location_info += f"{location_list[i].text}\n"
 
-                job_info_list = driver.find_elements(By.XPATH, '//*[@data-automation-id="jobPostingDescription"]//p')
+                job_info_list = driver.find_elements(By.XPATH, '//*[@data-automation-id="jobPostingDescription"]')
                 job_info = "" 
                 for i in range(len(job_info_list)):
                     #print(job_info_list[i].text)
@@ -71,12 +72,16 @@ def scrape(company, link):
                 
                 
                 date_posted = driver.find_element(By.XPATH, '//div[@data-automation-id="postedOn"]').text
-                values = (company, job_title_info, location_info, job_info, date_posted, job_link, 1, 'na', 'na', 'na', 0.0) #if a job is inserted, it's validity is set to 1
+                degree_info = wordextractor.degreeextract(job_info)
+                salary_info = wordextractor.salaryextract(job_info)
+                skills_info = wordextractor.skillsextract(job_info)
+                
+
+                values = (company, job_title_info, location_info, job_info, date_posted, job_link, 1, 'na', degree_info, skills_info, salary_info) #if a job is inserted, it's validity is set to 1
                 SQL_data.insert(values)
             except:
                 print("nothing to print")
                 
-
         try:
             time.sleep(5)
             nextButton = driver.find_element(By.XPATH, '//button[@data-uxi-widget-type="stepToNextButton"]')

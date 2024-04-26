@@ -6,7 +6,7 @@ import os
 from flask import send_file
 
 app = Flask(__name__)
-CORS(app, origins=["https://psych-survey.onrender.com", "http://localhost:3000"])
+CORS(app, origins=["https://nerd-search-79d2.onrender.com/", "http://localhost:3000"])
 DATABASE = os.path.join(os.path.dirname(os.path.realpath(__file__)), "jobs.db")
 
 

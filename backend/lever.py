@@ -44,10 +44,10 @@ def scrape(company, link):
         for i in range(len(job_info_list)):
             #print(job_info_list[i].text)
             job_info += f"{job_info_list[i].text}\n"
-            job_info += "\n"
+            job_info += "\n\n"
         # no date_posted in lever
         date_posted = 'NULL'
-        
+
         degree_info = wordextractor.degreeextract(job_info)
         salary_info = wordextractor.salaryextract(job_info)
         skills_info = wordextractor.skillsextract(job_info)

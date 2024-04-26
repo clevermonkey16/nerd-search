@@ -46,6 +46,7 @@ code {
   border: 1px solid gray;
   background-color: #ffffff;
   padding: 20px;
+  border-radius: 10px;
 }
 .jobOverview {
   border: 1px solid rgba(128, 128, 128, 0.5);
@@ -118,6 +119,7 @@ code {
   padding-top: 1.5rem;
   padding-bottom: 1rem;
   background-color: #ffffff;
+  border-radius: 10px;
 }
 
 .applyButton {

@@ -187,7 +187,7 @@ function Listing() {
       });
     };
     //const url = "http://localhost:4000";
-    const url = "https://nerd-search.onrender.com";
+    const url = "https://nerd-search-backend.onrender.com";
     fetch(url + "/jobs")
       .then((response) => {
         if (!response.ok) {

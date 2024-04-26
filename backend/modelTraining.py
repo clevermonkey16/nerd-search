@@ -62,8 +62,8 @@ def lemma_words(text):
 
 #if __name__ == '__main__':
 def trainModel():
-    tech_data = pd.read_csv("models/jobs.csv - trainingv2BDBUFF.csv")
-    notech_data = pd.read_csv("models/jobs.csv - why.csv")
+    tech_data = pd.read_csv("models/jobs.csv - trainingv2BDBUFF.csv") #change this file for tech/notech training
+    notech_data = pd.read_csv("models/jobs.csv - why.csv") #change this file for classification
 
     tech_training = pd.DataFrame(tech_data[['jobtitle', 'jobdescription', 'tag']])
     notech_training = pd.DataFrame(notech_data[['jobtitle', 'jobdescription','tech']])

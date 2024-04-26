@@ -35,7 +35,7 @@ code {
 }
 
 .jobBoard {
-  height: 94vh;
+  height: 92vh;
 }
 /* Job Overview */
 .jobOverviewPanel {
@@ -144,15 +144,40 @@ code {
   height: 7rem;
   align-items: center;
   display: flex;
-  padding-left: 22vw;
+  padding-left: 10vw;
+  padding-right: 2vw;
   background-color: #007bff;
   font-size: 1.3rem;
   font-weight: 500;
   color: white;
 }
 .searchBar {
-  height: 1.6rem;
+  height: 1.8rem;
   margin-right: 1rem;
   border-radius: 8px;
 }
+.tag {
+  display: inline-block;
+  background-color: grey;
+  border-radius: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  margin-right: 0.5rem;
+  margin-top: 0.4rem;
+  margin-bottom: 0.4rem;
+  border-radius: 10px;
+  font-size: 1rem;
+}
+
+.tag span {
+  margin-right: 0.5rem;
+}
+
+.tag button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  color: white;
+}
+
 /* End Search Bar */

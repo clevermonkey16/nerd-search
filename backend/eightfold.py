@@ -72,8 +72,10 @@ def scrape(company, link):
 
         degree_info = wordextractor.degreeextract(job_info)
         salary_info = wordextractor.salaryextract(job_info)
+        skills_info = wordextractor.skillsextract(job_info)
+       
 
-        values = (company, job_title_info, location_info, job_info, date_posted, job_link, 1, 'na', degree_info,'na', salary_info)
+        values = (company, job_title_info, location_info, job_info, date_posted, job_link, 1, 'na', degree_info, skills_info, salary_info)
         SQL_data.insert(values)
 
 

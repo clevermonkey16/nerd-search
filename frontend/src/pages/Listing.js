@@ -276,7 +276,7 @@ function Listing() {
         getStateAbbreviation(job[2])
           .toLowerCase()
           .includes(locationSearch.toLowerCase())) &&
-      tags.includes(job[7])
+      (tags.length === 0 || tags.includes(job[7]))
   );
   return (
     <div className="mainPage">

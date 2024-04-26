@@ -8,6 +8,7 @@ body {
   height: 100vh;
   overflow: hidden;
   font-family: "Source Sans 3";
+  background-color: #6a93d9;
 }
 
 code {
@@ -41,6 +42,7 @@ code {
 .jobOverviewPanel {
   width: 30rem;
   border: 1px solid gray;
+  background-color: #da84b1;
 }
 
 .jobOverview {
@@ -67,7 +69,7 @@ code {
 
 .overviewTitle {
   font-size: 1.6rem;
-  color: #4169e1;
+  color: #8458b3;
   font-weight: 500rem;
 }
 
@@ -113,12 +115,13 @@ code {
   padding-right: 1rem;
   padding-top: 1.5rem;
   padding-bottom: 1rem;
+  background-color: #da84b1;
 }
 
 .applyButton {
   display: inline-block;
   padding: 10px 20px;
-  background-color: #007bff; /* Button background color */
+  background-color: #8458b3; /* Button background color */
   color: #fff; /* Text color */
   text-decoration: none; /* Remove underline */
   border: none; /* Remove border */
@@ -146,7 +149,7 @@ code {
   display: flex;
   padding-left: 10vw;
   padding-right: 2vw;
-  background-color: #007bff;
+  background-color: #8458b3;
   font-size: 1.3rem;
   font-weight: 500;
   color: white;

@@ -18,6 +18,8 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 
 from sklearn import svm
 
+import pickle
+
 def remove_special_characters(text):
     pattern = r'[^a-zA-Z\s]'
     cleaned_text = re.sub(pattern, '', text)
@@ -151,7 +153,15 @@ def trainModel():
 
     #sn_pred = sn.predict(Xn_test_Tfidf_df)
 
+    pickle.dump(s, open("models/class.sav", 'wb'))
+    pickle.dump(sn, open("models/tech.sav", 'wb'))
+    pickle.dump(tfidf_vectorizer, open("models/vectorizer.sav", 'wb'))
+    pickle.dump(tfidf_vectorizer_noTech, open("models/vectorizer_noTech.sav", 'wb'))
+
     return tfidf_vectorizer, tfidf_vectorizer_noTech, s, sn
+
+if __name__ == "__main__":
+    trainModel()
 
 
 

@@ -4,7 +4,6 @@ function JobDetails({
   title,
   company,
   location,
-  pay,
   datePosted,
   jobId,
   link,
@@ -12,20 +11,38 @@ function JobDetails({
 }) {
   return (
     <div className="jobDetails verticalContainer">
-      <div>{title}</div>
-      <div>{company}</div>
-      <div>{location}</div>
-      <div>{pay}</div>
-      <div>{datePosted}</div>
-      <div>{description}</div>
-      <div>{jobId}</div>
+      <div className="detailsTitle">{title}</div>
+      <div className="detailsCompany">{company}</div>
+      <div>
+        Locations: <br />
+        {location.split("\n").map((line, index) => {
+          return (
+            <React.Fragment key={index}>
+              {line}
+              {line !== "" && <br />}
+            </React.Fragment>
+          );
+        })}
+      </div>
+      <div>{datePosted === "30" ? "Posted 30+ days ago" : datePosted}</div>
       <a
+        style={{ marginTop: "0.5rem", marginBottom: "0.5rem" }}
         href={link}
         target="_blank"
         rel="noreferrer"
         className="applyButton">
         Apply
       </a>
+      <div>
+        {description.split("\n").map((line, index) => {
+          return (
+            <React.Fragment key={index}>
+              {line}
+              {line !== "" && <br />}
+            </React.Fragment>
+          );
+        })}
+      </div>
     </div>
   );
 }

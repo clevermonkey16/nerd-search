@@ -18,8 +18,17 @@ function JobOverview({
       onClick={handleClick}>
       <div className="overviewTitle">{title}</div>
       <div>{company}</div>
-      <div>{location}</div>
-      <div>{datePosted.replace(/[^0-9\-/]/g, "")}</div>
+      <div>
+        {location.split("\n").map((line, index) => {
+          return (
+            <React.Fragment key={index}>
+              {line}
+              {line !== "" && <br />}
+            </React.Fragment>
+          );
+        })}
+      </div>
+      <div>{datePosted === "30" ? "Posted 30+ days ago" : datePosted}</div>
       <div>{selected}</div>
     </div>
   );

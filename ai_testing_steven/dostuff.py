@@ -1,10 +1,10 @@
 import json
-import pyrtl
 import statistics
 from math import log2
 import itertools
+import re
 
-minsize = 100 # consider words with frequency > minsize in each set
+minsize = 10 # consider words with frequency > minsize in each set
 
 count1 = 3909
 count2 = 22000
@@ -39,7 +39,7 @@ stattable = {}
 ratio = size2/size1
 
 cswords = []
-nwords = []
+nwords = [] # nword LMAO
 for word in data1.keys():
     if data1[word] <= minsize: continue
     if word in data2 and data2[word] > minsize:
@@ -63,8 +63,24 @@ for word in words:
     sortedwords[word] = log2(stattable[word])
     nums.append(log2(stattable[word]))
 
-print(sortedwords)
+# print(sortedwords)
 
+description = """
+
+Data Engineer Intern
+
+"""
+
+tokens = re.split(r'[,.\" !?><\-=+@#$/%^&*()\s\\:;{}\[\]~`•]', description)
+techness = 0
+for token in tokens:
+    if token in sortedwords:
+        print(token, sortedwords[token])
+        techness += sortedwords[token]
+
+print(techness)
+
+"""
 mean = statistics.mean(nums)
 med = statistics.median(nums)
 stdev = statistics.stdev(nums)
@@ -85,7 +101,7 @@ clean = list(itertools.filterfalse(lambda x:sortedwords[x]<mean+1.5*stdev, sorte
 print(clean)
 print(len(clean))
 print(sortedwords["python"])
-
+"""
 """
 improvements:
 - filter out low-frequency words automatically

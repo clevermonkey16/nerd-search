@@ -32,8 +32,17 @@ function JobOverviewPanel({ handleClick, jobs }) {
   };
   return (
     <div className="verticalContainer jobOverviewPanel">
-      {jobs.slice(startIndex, endIndex).map((job) => {
-        return (
+      {jobs.length === 0 ? (
+        <div
+          style={{
+            textAlign: "center",
+            fontSize: "1.3rem",
+            marginTop: "2rem",
+          }}>
+          No jobs found.
+        </div>
+      ) : (
+        jobs.slice(startIndex, endIndex).map((job) => (
           <JobOverview
             key={job[5]}
             title={job[1]}
@@ -45,18 +54,23 @@ function JobOverviewPanel({ handleClick, jobs }) {
             onClick={handleClickAndSetJob}
             description={job[3]}
           />
-        );
-      })}
+        ))
+      )}
 
       {/* Page Controls */}
       <div className="horizontalContainer pageControls">
         <button
+          className="pageButton"
+          style={{ marginRight: "2rem", marginLeft: "2rem" }}
           onClick={prevPage}
           disabled={currentPage === 1}>
           Previous Page
         </button>
+        <div className="pageNumber">{currentPage}</div>
         <button
+          className="pageButton"
           onClick={nextPage}
+          style={{ marginLeft: "2rem", marginRight: "2rem" }}
           disabled={endIndex >= jobs.length}>
           Next Page
         </button>

@@ -5,7 +5,7 @@ import sqlite3
 
 app = Flask(__name__)
 CORS(app)
-DATABASE = "/jobs.db"
+DATABASE = "/backend/jobs.db"
 
 
 # Connect to the database
@@ -24,7 +24,12 @@ def close_connection(exception):
         db.close()
 
 
-@app.route("/", methods=["GET"])
+@app.route("/")
+def hello_world():
+    return "Hello, World!"
+
+
+@app.route("/jobs", methods=["GET"])
 def get_jobs():
     cursor = get_db().cursor()
     cursor.execute("SELECT * FROM jobs")

@@ -15,6 +15,7 @@ import greenhouse
 import lever
 import eightfold
 import writedata
+import classifier
 
 
 def scrape(company, type, link):
@@ -60,6 +61,8 @@ if __name__ == "__main__":
 
     SQL_data.nukeInvalid()
     SQL_data.close()
+
+    classifier.classify()
 
 
 

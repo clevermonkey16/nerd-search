@@ -1,4 +1,5 @@
 import React from "react";
+import { useRef, useEffect } from "react";
 
 function JobDetails({
   title,
@@ -8,9 +9,28 @@ function JobDetails({
   jobId,
   link,
   description,
+  degree,
+  skills,
+  salary,
 }) {
+  const componentRef = useRef(null);
+  const prevJobIdRef = useRef(jobId);
+  useEffect(() => {
+    // Check if the current value of myVariable is different from the previous value
+    if (jobId !== prevJobIdRef.current) {
+      // If it's different, execute the onChange function
+      if (componentRef.current) {
+        componentRef.current.scrollTop = 0;
+      }
+
+      // Update the previous value to the current value
+      prevJobIdRef.current = prevJobIdRef;
+    }
+  }, [jobId]);
   return (
-    <div className="jobDetails verticalContainer">
+    <div
+      className="jobDetails verticalContainer"
+      ref={componentRef}>
       <div className="detailsTitle">{title}</div>
       <div className="detailsCompany">{company}</div>
       <div>
@@ -43,6 +63,9 @@ function JobDetails({
           );
         })}
       </div>
+      <div>{degree}</div>
+      <div>{skills}</div>
+      <div>{salary}</div>
     </div>
   );
 }
